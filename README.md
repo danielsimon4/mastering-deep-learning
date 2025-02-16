@@ -1,5 +1,7 @@
 <h1>Mastering Deep Learning:<br>From Neural Networks to Transformers</h1>
 
+<br>
+
 **How to Cite This Work:**
 
 Simon, D. (2025). *Mastering Deep Learning: From Neural Networks to Transformers*. [https://danielsimon4.github.io/deep-learning-book/](https://danielsimon4.github.io/deep-learning-book/)
