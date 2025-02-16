@@ -2,7 +2,7 @@
 
 <br>
 
-**Link to the Online Book:**
+**Link to Online Book:**
 
 [https://danielsimon4.github.io/mastering-deep-learning/](https://danielsimon4.github.io/mastering-deep-learning/)
 
