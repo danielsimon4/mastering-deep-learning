@@ -1,0 +1,1227 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Neural Networks &#8212; Mastering Deep Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a0a3bb93" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/ch2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Improving NNs" href="ch3.html" />
+    <link rel="prev" title="1. Deep Learing" href="ch1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Mastering Deep Learning - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Mastering Deep Learning - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ch1.html">1. Deep Learing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3.html">3. Improving NNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4.html">4. Image Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5.html">5. Image Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch6.html">6. Text Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7.html">7. Text Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">8. References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/danielsimon4/deep-learning-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/ch2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neurons">2.2. Neurons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-nns-learn">2.3. How NNs Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digits-recognizer">2.4. Digits Recognizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">2.5. MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">2.6. Forward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tanh">2.7. Tanh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">2.8. Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-loss">2.9. Calculate Loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-pass">2.10. Backward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">2.11. Update Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">2.12. Training</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-networks">
+<h1><span class="section-number">2. </span>Neural Networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2><span class="section-number">2.1. </span>Neural Networks<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>        <strong>Neural networks (NNs)</strong> are computational models inspired by the structure of the human brain, designed to recognize patterns and make predictions. They consist of layers of interconnected nodes (often called neurons) that process information through mathematical operations.</p>
+<p>A basic neural network has the following structure:</p>
+<ol class="arabic simple">
+<li><p><strong>Input Layer</strong>: It receives raw data, like pixels of an image, or tokens of a text. Each node in this layer represents an input dimension.</p></li>
+<li><p><strong>Hidden Layers</strong>: They are between the input layer and output layer, and process the information. Each hidden layer transforms data from the previous layer, allowing the network to progressively learn and recognize patterns.</p></li>
+<li><p><strong>Output Layer</strong>: It provides the network’s output.</p></li>
+</ol>
+<figure class="align-default" id="neural-network">
+<a class="reference internal image-reference" href="../_images/neural-network.png"><img alt="../_images/neural-network.png" src="../_images/neural-network.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Basic Structure of a Neural Network</span><a class="headerlink" href="#neural-network" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="neurons">
+<span id="id2"></span><h2><span class="section-number">2.2. </span>Neurons<a class="headerlink" href="#neurons" title="Link to this heading">#</a></h2>
+<p>        A <strong>neuron</strong> is a unit that takes in multiple inputs and processes them to produce a single output. As shown above in <a class="reference internal" href="#neural-network"><span class="std std-ref"><em>Fig. 1.2</em></span></a>, each neuron in the hidden and output layers connects to all the neurons in the previous layer. These connections have associated values, known as <strong>weights</strong>, which are adjusted by the model. The weights represent the strength of connection between the neurons. A greater weight indicates a stronger connection.</p>
+<figure class="align-default" id="neuron">
+<a class="reference internal image-reference" href="../_images/neuron.png"><img alt="../_images/neuron.png" src="../_images/neuron.png" style="width: 220px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Structure of a Neuron</span><a class="headerlink" href="#neuron" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition-neuron-s-output admonition">
+<p class="admonition-title">Neuron’s output</p>
+<p>To calculate the output of a neuron, all the inputs to the neuron (<span class="math notranslate nohighlight">\(x_{1}, x_{2}, \dots, x_{d}\)</span>) are multiplied by their corresponding connection weights (<span class="math notranslate nohighlight">\(w_{1}, w_{2}, \dots, w_{d}\)</span>), and the products are summed.</p>
+<p>A numerical value, called the bias (<span class="math notranslate nohighlight">\(b\)</span>), is then added to the weighted sum. Finally, the result is passed through an <strong>activation function</strong> (<span class="math notranslate nohighlight">\(\sigma\)</span>) that returns the output of the neuron, the neuron’s <strong>activation value</strong> (<span class="math notranslate nohighlight">\(h\)</span>).</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\small
+h = \sigma\left(x_1w_1 + x_2w_2 + \dots + x_dw_d + b\right)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d\)</span> is the dimensionality of the input vector.</p></li>
+</ul>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please note that the ouput of a neuron is one of the inputs to all the neurons in the next layer.</p>
+</div>
+</section>
+<section id="how-nns-learn">
+<h2><span class="section-number">2.3. </span>How NNs Learn<a class="headerlink" href="#how-nns-learn" title="Link to this heading">#</a></h2>
+<p>Neural networks use supervised learning to adjust their parameters (weights and biases) to minimize the loss function. This process involves repeating these four steps during training:</p>
+<ol class="arabic simple">
+<li><p><strong>Forward Pass:</strong> Process input data though network and generate predictions.</p></li>
+<li><p><strong>Calculate Loss:</strong> Calculate the error of the predictions.</p></li>
+<li><p><strong>Backward Pass:</strong> Compute gradient of the loss function with respect to the network’s parameters.</p></li>
+<li><p><strong>Update Parameters:</strong> Adjust network’s parameters to minimize the loss.</p></li>
+</ol>
+</section>
+<section id="digits-recognizer">
+<h2><span class="section-number">2.4. </span>Digits Recognizer<a class="headerlink" href="#digits-recognizer" title="Link to this heading">#</a></h2>
+<p>        In this and the following chapters, we will build a discriminative model to recognize handwritten digits. To train our neural network, we will use the <a class="reference external" href="https://huggingface.co/datasets/ylecun/mnist">MNIST dataset</a>, which contains 60,000 training images and 10,000 test images. All the images are labeled, grayscale, and 28 x 28 pixels.</p>
+<figure class="align-default" id="digit-recognizer">
+<a class="reference internal image-reference" href="../_images/digit-recognizer.png"><img alt="../_images/digit-recognizer.png" src="../_images/digit-recognizer.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Digit Recognizer</span><a class="headerlink" href="#digit-recognizer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="c1"># set print options for PyTorch tensors</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">sci_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># load the MNIST dataset</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;ylecun/mnist&quot;</span><span class="p">)</span>
+
+<span class="c1"># preprocess the data (we will see this function in Chapter 4)</span>
+<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels: </span><span class="si">{</span><span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: torch.Size([60000, 28, 28])
+Labels: torch.Size([60000])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each image is currently stored as a matrix of shape (28, 28). To be able to process these images, we need to flatten them into vectors of shape (784).</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Help</p>
+<p><code class="docutils literal notranslate"><span class="pre">tensor.view()</span></code> efficiently reshapes the shape of a tensor.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># flatten images</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: torch.Size([60000, 784])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mlp">
+<h2><span class="section-number">2.5. </span>MLP<a class="headerlink" href="#mlp" title="Link to this heading">#</a></h2>
+<p>        A <strong>multilayer perceptron (MLP)</strong> is a type of neural network composed of multiple layers of fully connected neurons with nonlinear activation functions. Our MLP will have 784 input neurons (one for each pixel in the image) and 10 output neurons (one for each possible class: 0 to 9).</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/MLP.png"><img alt="../_images/MLP.png" src="../_images/MLP.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">MLP</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="dropdown admonition">
+<p class="admonition-title">Help</p>
+<p><code class="docutils literal notranslate"><span class="pre">torch.randn()</span></code> generates a tensor filled with random numbers drawn from a normal distribution (mean = 0, standard deviation = 1).</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize_nn</span><span class="p">(</span><span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+
+    <span class="c1"># seed for reproducibility</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">W1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">784</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">),</span>      <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">)</span>
+    <span class="n">W2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">)</span>
+    <span class="n">W3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="n">n_hidden</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>       <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">b3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">W3</span><span class="p">,</span> <span class="n">b3</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">parameters</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">initialize_nn</span><span class="p">()</span>
+<span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">W3</span><span class="p">,</span> <span class="n">b3</span> <span class="o">=</span> <span class="n">parameters</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="forward-pass">
+<h2><span class="section-number">2.6. </span>Forward Pass<a class="headerlink" href="#forward-pass" title="Link to this heading">#</a></h2>
+<p>In the <strong>forward pass</strong>, the input data flows through the neural network, layer by layer, to produce the network’s output.</p>
+<div class="admonition-neuron-s-output admonition">
+<p class="admonition-title">Neuron’s output</p>
+<p>In section <a class="reference internal" href="ch8.html#id2"><span class="std std-ref">2.2</span></a>, we saw that the output of a neuron is given by the formula:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\small
+h = \sigma\left(x_1w_1 + x_2w_2 + \dots + x_dw_d + b\right)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d\)</span> is the dimensionality of the input vector.</p></li>
+</ul>
+</div>
+<div class="admonition-neuron-s-output-dot-product admonition">
+<p class="admonition-title">Neuron’s output (dot product)</p>
+<p>Using a dot product we can express the weighted sum as:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\small
+h = \sigma\left(
+\begin{bmatrix}
+x_1 &amp; x_2 &amp; \dots &amp; x_d
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+w_1 \\
+w_2 \\
+\vdots \\
+w_d
+\end{bmatrix}
++ b\right)
+\end{split}\]</div>
+</div>
+<div class="admonition-layer-s-output-single-examples admonition">
+<p class="admonition-title">Layer’s output (single examples)</p>
+<p>Using a weight matrix we can calculate the activation values of all the neurons in the layer:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\small
+\begin{bmatrix}
+h_1 &amp; h_2 &amp; \dots &amp; h_m
+\end{bmatrix}
+=
+\sigma\left(
+\begin{bmatrix}
+x_1 &amp; x_2 &amp; \dots &amp; x_d
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+w_{11} &amp; w_{12} &amp; \dots &amp; w_{1m} \\
+w_{21} &amp; w_{22} &amp; \dots &amp; w_{2m} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+w_{d1} &amp; w_{d2} &amp; \dots &amp; w_{dm} \\
+\end{bmatrix}
++
+\begin{bmatrix}
+b_1 &amp; b_2 &amp; \dots &amp; b_m
+\end{bmatrix}
+\right)
+\end{split}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> is the number of neurons in the layer.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Each column of the weight matrix contains the weights of the connections between a single neuron in the current layer and all the neurons in the previous layer.</p>
+</div>
+</div>
+<div class="admonition-layer-s-output-multiple-examples admonition">
+<p class="admonition-title">Layer’s output (multiple examples)</p>
+<p>Uisng matrix multiplication we can efficiently calculate in parallel the output of a layer for several input examples:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\small
+\begin{bmatrix}
+h_{11} &amp; h_{12} &amp; \dots &amp; h_{1m} \\
+h_{21} &amp; h_{22} &amp; \dots &amp; h_{2m} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+h_{N1} &amp; h_{N2} &amp; \dots &amp; h_{Nm}
+\end{bmatrix}
+=
+\sigma\left(
+\begin{bmatrix}
+x_{11} &amp; h_{12} &amp; \dots &amp; h_{1d} \\
+x_{21} &amp; h_{22} &amp; \dots &amp; h_{2d} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{N1} &amp; h_{N2} &amp; \dots &amp; h_{Nd}
+\end{bmatrix}
+\times
+\begin{bmatrix}
+w_{11} &amp; w_{12} &amp; \dots &amp; w_{1m} \\
+w_{21} &amp; w_{22} &amp; \dots &amp; w_{2m} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+w_{d1} &amp; w_{d2} &amp; \dots &amp; w_{dm} \\
+\end{bmatrix}
++
+\begin{bmatrix}
+b_{1} &amp; b_{2} &amp; \dots &amp; b_{m}
+\end{bmatrix}
+\right)
+\end{split}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the number of input examples.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Each row of the output matrix contains the activation values of all the neurons in the layer for a single input example.</p>
+</div>
+</div>
+</section>
+<section id="tanh">
+<h2><span class="section-number">2.7. </span>Tanh<a class="headerlink" href="#tanh" title="Link to this heading">#</a></h2>
+</section>
+<section id="softmax">
+<h2><span class="section-number">2.8. </span>Softmax<a class="headerlink" href="#softmax" title="Link to this heading">#</a></h2>
+<p>        <strong>Softmax</strong> is an activation function often used in the output layer of neural networks. It transforms raw neural network outputs, known as logits, into probability distributions where each probability represents the model’s confidence that a given example belongs to a specific class.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/softmax.png"><img alt="../_images/softmax.png" src="../_images/softmax.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Softmax</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># forward pass</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>   <span class="c1"># (60000, 100) = (60000, 784) x (784, 100) + (100)</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>  <span class="c1"># (60000, 100) = (60000, 100) x (100, 100) + (100)</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>          <span class="c1"># (60000,  10) = (60000, 100) x (100,  10) + (10)</span>
+
+<span class="c1"># softmax</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span> <span class="o">/</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># (60000,  10)</span>
+
+<span class="c1"># print  first 5 probabilities</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probs</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[    0.6741,     0.3209,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0050,     0.0000,     0.0000],
+        [    0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.8520,     0.0000,     0.1480],
+        [    0.0000,     1.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000],
+        [    0.0000,     0.0000,     0.0005,     0.0000,     0.9965,     0.0000,     0.0000,     0.0001,     0.0028,     0.0000],
+        [    0.9911,     0.0000,     0.0033,     0.0000,     0.0000,     0.0000,     0.0056,     0.0000,     0.0000,     0.0000]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-loss">
+<h2><span class="section-number">2.9. </span>Calculate Loss<a class="headerlink" href="#calculate-loss" title="Link to this heading">#</a></h2>
+<p>        The forward pass can also be seen as the step where the model, using its current parameters, generates predictions. The <strong>Cross-Entropy Loss</strong> is a widely used loss function for classification tasks that evaluates how well these predictions align with the labels. It combines Softmax with the average negative log-likelihood.</p>
+<div class="admonition-likelihood admonition">
+<p class="admonition-title">Likelihood</p>
+<p>The <strong>likelihood</strong> represents the joint probability of the model assigning correct labels to all examples:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\text{likelihood} = \prod_{i=1}^{N} p_i
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p_i\)</span> is the probability assigned by the model to the correct class for the <span class="math notranslate nohighlight">\(i\)</span>-th example.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the total number of examples in the dataset.</p></li>
+</ul>
+</div>
+<div class="admonition-log-likelihood admonition">
+<p class="admonition-title">Log Likelihood</p>
+<p>Since each <span class="math notranslate nohighlight">\(p_i\)</span> is a value between 0 and 1, their product can become very small. To avoid numerical instability, we take the logarithm of the likelihood:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\text{log likelihood} = \log \left(\prod_{i=1}^{N} p_i \right) = \sum_{i=1}^{N} \log(p_i)
+\]</div>
+</div>
+<div class="admonition-negative-log-likelihood admonition">
+<p class="admonition-title">Negative Log Likelihood</p>
+<p>Looking at the graph of the logarithmic function, please note that:</p>
+<ul class="simple">
+<li><p>If we pass in a probability of <span class="math notranslate nohighlight">\(1\)</span>, the log probability is <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>If we pass in a lower probability <span class="math notranslate nohighlight">\(\left(0 &lt; p &lt; 1 \right)\)</span>, the log probability becomes more negative.</p></li>
+<li><p>If we pass in a probability of 0, the log probability is <span class="math notranslate nohighlight">\(-\infty\)</span>.</p></li>
+</ul>
+<figure class="align-default" id="log-function">
+<a class="reference internal image-reference" href="../_images/log-function.png"><img alt="../_images/log-function.png" src="../_images/log-function.png" style="width: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Logarithmic Function</span><a class="headerlink" href="#log-function" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<br>
+<p>Thus, when all the individual probabilities are 1 (the best-case scenario), the log likelihood is 0, and when the probabilities decrease, the log likelihood becomes more negative. To make it eassier to interpret, we use the <strong>negative log likelihood (NLL)</strong>, a positive metric where values closer to 0 indicate better predictions:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\text{NLL} = - \sum_{i=1}^{N} \log(p_i)
+\]</div>
+</div>
+<div class="admonition-average-negative-log-likelihood admonition">
+<p class="admonition-title">Average Negative Log Likelihood</p>
+<p>To normalize the NLL, it is often divided by the total number of examples in the dataset:</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\text{Average NLL} = - \frac{1}{N} \sum_{i=1}^{N} \log(p_i)
+\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of train images </span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">60000</span>
+
+<span class="c1"># average NLL</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">probs</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">train_y</span><span class="p">]</span><span class="o">.</span><span class="n">log</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss: 15.9699
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="backward-pass">
+<h2><span class="section-number">2.10. </span>Backward Pass<a class="headerlink" href="#backward-pass" title="Link to this heading">#</a></h2>
+<p>        A lower loss indicates that the model is making more accurate predictions by assigning higher probabilities to the correct classes. Thus, to improve the model’s performance, we aim to minimize the loss by adjusting its parameters.</p>
+<p>        During the <strong>backward pass</strong>, or backpropagation, we calculate the gradient of the loss function with respect to these parameters. This gradient is determined by computing the derivative of the loss with respect to the model’s parameters using the chain rule. To simplify this process, we will break the forward pass into smaller components, making it easier to differentiate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hidden layer 1</span>
+<span class="n">h1_pre</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1_pre</span><span class="p">)</span>
+
+<span class="c1"># hidden layer 2</span>
+<span class="n">h2_pre</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h2_pre</span><span class="p">)</span>
+
+<span class="c1"># output layer</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>
+
+<span class="c1"># softmax</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
+<span class="n">counts_sum</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">counts_sum_inv</span> <span class="o">=</span> <span class="n">counts_sum</span><span class="o">**-</span><span class="mi">1</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">*</span> <span class="n">counts_sum_inv</span>
+
+<span class="c1"># average NLL</span>
+<span class="n">log_probs</span> <span class="o">=</span> <span class="n">probs</span><span class="o">.</span><span class="n">log</span><span class="p">()</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">log_probs</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">train_y</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first calculate the derivative of the loss with respect to the log probabilities.</p>
+<br>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+loss = - mean(log\_probs) \quad \Rightarrow \quad
+\begin{matrix}
+dlog\_probs = 0 \text{ if not p_i}\\
+dlog\_probs = -\frac{1}{N} \text{if p_i}
+\end{matrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dlog_probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">log_probs</span><span class="p">)</span>
+<span class="n">dlog_probs</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">train_y</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">N</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we calculate the derivative of the loss with respect to the probabilities using the chain rule.</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+log\_probs = log(probs) \quad \Rightarrow \quad dprobs = \frac{1}{probs} \cdot dlog\_probs
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dprobs</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">probs</span><span class="p">)</span> <span class="o">*</span> <span class="n">dlog_probs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will continue backpropagating by calculating the derivative of the loss with respect to the intermediate values, and then, with respect to the model’s parameters.</p>
+<br>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+probs = counts \cdot counts\_sum\_inv \quad \Rightarrow \quad
+\begin{matrix}
+dcounts = counts\_sum\_inv \cdot dprobs \\
+dcounts\_sum\_inv = counts \cdot dprobs
+\end{matrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dcounts</span> <span class="o">=</span> <span class="n">counts_sum_inv</span> <span class="o">*</span> <span class="n">dprobs</span>
+<span class="n">dcounts_sum_inv</span> <span class="o">=</span> <span class="p">(</span><span class="n">counts</span> <span class="o">*</span> <span class="n">dprobs</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+counts\_sum\_inv = \frac{1}{counts\_sum} \quad \Rightarrow \quad dcounts\_sum = -\frac{1}{\sqrt{counts\_sum}} \cdot dcounts\_sum\_inv
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dcounts_sum</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">counts_sum</span><span class="o">**-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dcounts_sum_inv</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+counts\_sum = \text{sum of rows of counts} \quad \Rightarrow \quad dcounts = dcounts\_sum
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dcounts</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span> <span class="o">*</span> <span class="n">dcounts_sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+counts = e^{logits} \quad \Rightarrow \quad dlogits = counts \cdot dcounts
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dlogits</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">*</span> <span class="n">dcounts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{logits} = h2 \times W3 + b3 \quad \Rightarrow \quad
+\begin{matrix}
+dh2 = dlogits \times (W3)^T \\
+dW3 = (h2)^T \times dlogits \\
+db3 = \text{sum of columns of dlogits}
+\end{matrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dh2</span> <span class="o">=</span> <span class="n">dlogits</span> <span class="o">@</span> <span class="n">W3</span><span class="o">.</span><span class="n">T</span>
+<span class="n">dW3</span> <span class="o">=</span> <span class="n">h2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">dlogits</span>
+<span class="n">db3</span> <span class="o">=</span> <span class="n">dlogits</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+h2 = tanh(h2\_pre) \quad \Rightarrow \quad dh2\_pre = (1 - (h2)^2) \cdot dh2
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dh2_pre</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dh2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h2\_pre = h1 \times W2 + b2 \quad \Rightarrow \quad
+\begin{matrix}
+dh1 = dh2\_pre \times (W2)^T \\
+dW2 = (h1)^T \times dh2\_pre \\
+db2 = \text{sum of columns of dh2\_pre}
+\end{matrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dh1</span> <span class="o">=</span> <span class="n">dh2_pre</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span>
+<span class="n">dW2</span> <span class="o">=</span> <span class="n">h1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">dh2_pre</span>
+<span class="n">db2</span> <span class="o">=</span> <span class="n">dh2_pre</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+h1 = tanh(h1\_pre) \quad \Rightarrow \quad dh1\_pre = (1 - (h1)^2) \cdot dh1
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dh1_pre</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dh1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h1\_pre = X \times W1 + b1 \quad \Rightarrow \quad
+\begin{matrix}
+dh1 = dh1\_pre \times (W1)^T \\
+dW1 = (X)^T \times dh1\_pre \\
+db1 = \text{sum of columns of dh1\_pre}
+\end{matrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dX</span> <span class="o">=</span> <span class="n">dh1_pre</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span>
+<span class="n">dW1</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">dh1_pre</span>
+<span class="n">db1</span> <span class="o">=</span> <span class="n">dh1_pre</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will create a list that contains the gradient of the loss function with respect to the parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grads</span> <span class="o">=</span> <span class="p">[</span><span class="n">dW1</span><span class="p">,</span> <span class="n">db1</span><span class="p">,</span> <span class="n">dW2</span><span class="p">,</span> <span class="n">db2</span><span class="p">,</span> <span class="n">dW3</span><span class="p">,</span> <span class="n">db3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="update-parameters">
+<h2><span class="section-number">2.11. </span>Update Parameters<a class="headerlink" href="#update-parameters" title="Link to this heading">#</a></h2>
+<p>        A gradient is a vector that indicates the direction and rate of the steepest increase in a function’s value. To minimize the loss function, we use <strong>gradient descent</strong>, an optimization algorithm that updates the model’s parameters by moving in the opposite direction of the gradient.</p>
+<div class="admonition-gradient-descent admonition">
+<p class="admonition-title">Gradient descent</p>
+<p>Gradient descent updates each parameter by subtracting a fraction of the gradient from its current value, scaled by a factor known as the learning rate.</p>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\theta = \theta - \eta \cdot \nabla L(\theta)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> represents the parameters of the neural network.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\eta\)</span> is the learning rate.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla L(\theta)\)</span> is the gradient of the loss function with respect to the parameters.</p></li>
+</ul>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The learning rate determines the size of the steps we take towards the minimum. A smaller learning rate results in more precise but slower convergence, while a larger learning rate can speed up convergence but may risk overshooting the minimum.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span> 
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">grad</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">grads</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="training">
+<h2><span class="section-number">2.12. </span>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
+<p>        During <strong>training</strong>, a neural network iteratively performs a forward pass, calculates the loss, makes a backward pass, and updates its parameters. In this case, since the entire trainig dataset is processed in each training iteration, we can refer to each iteration as an epoch.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># train iterations</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>           <span class="c1"># learning rate</span>
+
+<span class="c1"># intialize neural network</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">initialize_nn</span><span class="p">()</span>
+<span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">W3</span><span class="p">,</span> <span class="n">b3</span> <span class="o">=</span> <span class="n">parameters</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+
+    <span class="c1"># -------------------- forward pass --------------------</span>
+
+    <span class="c1"># hidden layer 1</span>
+    <span class="n">h1_pre</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1_pre</span><span class="p">)</span>
+
+    <span class="c1"># hidden layer 2</span>
+    <span class="n">h2_pre</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h2_pre</span><span class="p">)</span>
+
+    <span class="c1"># output layer</span>
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>
+
+    <span class="c1"># softmax</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
+    <span class="n">counts_sum</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">counts_sum_inv</span> <span class="o">=</span> <span class="n">counts_sum</span><span class="o">**-</span><span class="mi">1</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">*</span> <span class="n">counts_sum_inv</span>
+
+
+    <span class="c1"># -------------------- calculate loss --------------------</span>
+
+    <span class="c1"># average negative log liklihood</span>
+    <span class="n">log_probs</span> <span class="o">=</span> <span class="n">probs</span><span class="o">.</span><span class="n">log</span><span class="p">()</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">log_probs</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">train_y</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="c1"># print loss every 10 epochs</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="n">epochs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2">     Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+
+    <span class="c1"># -------------------- backward pass --------------------</span>
+
+    <span class="n">dlog_probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">log_probs</span><span class="p">)</span>
+    <span class="n">dlog_probs</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">train_y</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">N</span>
+
+    <span class="n">dprobs</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">probs</span><span class="p">)</span> <span class="o">*</span> <span class="n">dlog_probs</span>
+    <span class="n">dcounts</span> <span class="o">=</span> <span class="n">counts_sum_inv</span> <span class="o">*</span> <span class="n">dprobs</span>
+    <span class="n">dcounts_sum_inv</span> <span class="o">=</span> <span class="p">(</span><span class="n">counts</span> <span class="o">*</span> <span class="n">dprobs</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dcounts_sum</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">counts_sum</span><span class="o">**-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dcounts_sum_inv</span>
+    <span class="n">dcounts</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span> <span class="o">*</span> <span class="n">dcounts_sum</span>
+
+    <span class="n">dlogits</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">*</span> <span class="n">dcounts</span>
+    <span class="n">dh2</span> <span class="o">=</span> <span class="n">dlogits</span> <span class="o">@</span> <span class="n">W3</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">dW3</span> <span class="o">=</span> <span class="n">h2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">dlogits</span>
+    <span class="n">db3</span> <span class="o">=</span> <span class="n">dlogits</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">dh2_pre</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dh2</span>
+    <span class="n">dh1</span> <span class="o">=</span> <span class="n">dh2_pre</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">dW2</span> <span class="o">=</span> <span class="n">h1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">dh2_pre</span>
+    <span class="n">db2</span> <span class="o">=</span> <span class="n">dh2_pre</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">dh1_pre</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dh1</span>
+    <span class="n">dX</span> <span class="o">=</span> <span class="n">dh1_pre</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">dW1</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">dh1_pre</span>
+    <span class="n">db1</span> <span class="o">=</span> <span class="n">dh1_pre</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">grads</span> <span class="o">=</span> <span class="p">[</span><span class="n">dW1</span><span class="p">,</span> <span class="n">db1</span><span class="p">,</span> <span class="n">dW2</span><span class="p">,</span> <span class="n">db2</span><span class="p">,</span> <span class="n">dW3</span><span class="p">,</span> <span class="n">db3</span><span class="p">]</span>
+
+
+    <span class="c1"># -------------------- update parameters --------------------</span>
+
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">grad</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">grads</span><span class="p">):</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  0/100     Loss: 15.9699
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 10/100     Loss: 10.9262
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 20/100     Loss: 8.3451
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 30/100     Loss: 6.7141
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 40/100     Loss: 5.6266
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 50/100     Loss: 4.8790
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 60/100     Loss: 4.3457
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 70/100     Loss: 3.9500
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 80/100     Loss: 3.6406
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 90/100     Loss: 3.3900
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 99/100     Loss: 3.2024
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ch1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Deep Learing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ch3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Improving NNs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neurons">2.2. Neurons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-nns-learn">2.3. How NNs Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digits-recognizer">2.4. Digits Recognizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">2.5. MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">2.6. Forward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tanh">2.7. Tanh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">2.8. Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-loss">2.9. Calculate Loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-pass">2.10. Backward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">2.11. Update Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">2.12. Training</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Daniel Simon
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

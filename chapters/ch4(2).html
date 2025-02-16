@@ -1,0 +1,1006 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MLP &#8212; Mastering Deep Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a0a3bb93" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/ch4(2)';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Mastering Deep Learning - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Mastering Deep Learning - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ch1.html">1. Deep Learing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2.html">2. Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3.html">3. Improving NNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4.html">4. Image Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5.html">5. Image Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch6.html">6. Text Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7.html">7. Text Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">8. References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/danielsimon4/deep-learning-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/ch4(2).ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>MLP</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dataset">Import Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">Train, Test, and Validation Splits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-network">Convolutional Neural Network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convoultion-layer">Convoultion Layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-layer">Pooling Layer</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mlp">
+<h1>MLP<a class="headerlink" href="#mlp" title="Link to this heading">#</a></h1>
+<section id="import-dataset">
+<h2>Import Dataset<a class="headerlink" href="#import-dataset" title="Link to this heading">#</a></h2>
+<p>Usually data is not ready</p>
+<p>Using the MNIST dataset, I created a CNN model that recognizes handwritten digits with an accuracy of 99.64%. That is, it correctly predicted 4,972 out of 5,000 images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="c1"># set print options to avoid scientific notation</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">sci_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># load the MNIST dataset</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;ylecun/mnist&quot;</span><span class="p">)</span>
+<span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatasetDict({
+    train: Dataset({
+        features: [&#39;image&#39;, &#39;label&#39;],
+        num_rows: 60000
+    })
+    test: Dataset({
+        features: [&#39;image&#39;, &#39;label&#39;],
+        num_rows: 10000
+    })
+})
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on the dataset structure, we can access the images like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cb3c6fbd9f406a875a58c19dc9b8789af1ed8d4492d901d5fe8b9d95afb07ae7.png" src="../_images/cb3c6fbd9f406a875a58c19dc9b8789af1ed8d4492d901d5fe8b9d95afb07ae7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_image</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+<span class="n">first_image</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1aecaa0e99943d77fdcef47a591e7b7bec750f410d70173827b2ef2de23db56c.png" src="../_images/1aecaa0e99943d77fdcef47a591e7b7bec750f410d70173827b2ef2de23db56c.png" />
+</div>
+</div>
+<p>Please note that the images in the dataset are in PIL (Python Imaging Library) format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">first_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PIL.PngImagePlugin.PngImageFile
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-preprocessing">
+<h2>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
+<p>Usually, the collected data is not immediately ready to be the input of a machine learning model. The steps taken to clean and prepare the data are known as <strong>data preprocessing</strong>.</p>
+<p>When working with PIL images in deep learning, the typical workflow involves converting them first to NumPy arrays and then, to normalized PyTorch tensors.</p>
+<p>Suppose we have the following 4x4 PIL image:</p>
+<figure class="align-default" id="image-example">
+<a class="reference internal image-reference" href="../_images/image-example.png"><img alt="../_images/image-example.png" src="../_images/image-example.png" style="width: 180px;" /></a>
+<figcaption>
+<p><span class="caption-text">4x4 PIL image</span><a class="headerlink" href="#image-example" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>When we convert this image to a NumPy array, each pixel value ranges from 0 (black) to 255 (white), with intermediate values representing varying shades of gray.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">42</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mi">42</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">213</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">255</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>Neural networks perform better when when we <strong>normalize</strong> the input values so that they fall within the range [0, 1]. To do this, we divide each pixel value by 255, transforming the image into a format where 0 represents black and 1 represents white.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.1647</span><span class="p">,</span> <span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.1647</span><span class="p">,</span> <span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">,</span> <span class="mf">0.8353</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">,</span> <span class="mf">0.8353</span><span class="p">,</span> <span class="mf">1.0000</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>We will now apply these transformations to all the images in the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert PIL image to normalized PyToch tensor</span>
+<span class="k">def</span> <span class="nf">image_to_tensor</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">))</span> <span class="o">/</span> <span class="mf">255.0</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_data</span><span class="p">(</span><span class="n">split</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list to store image tensors</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list to store labels</span>
+
+    <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">split</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_to_tensor</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])</span>
+<span class="n">test_x</span><span class="p">,</span>  <span class="n">test_y</span>  <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-test-and-validation-splits">
+<h2>Train, Test, and Validation Splits<a class="headerlink" href="#train-test-and-validation-splits" title="Link to this heading">#</a></h2>
+<p>When working with neural networks, it is common practice to divide the dataset into three splits:</p>
+<ul class="simple">
+<li><p>The <strong>train split</strong> (80% of the dataset) is used to optimize the model parameters.</p></li>
+<li><p>The <strong>validation split</strong> (10% of the dataset) is used to optimize the hyperparameters, such as the size of the hidden layer, embedding size, and regularization strength.</p></li>
+<li><p>The <strong>test split</strong> (10% of the dataset) is used to evaluate the final performance of the model.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The test split should be used only after the model is fully optimized, as its goal is to evaluate the model’s performance on new data. Attempting to improve the test loss adjusting the hyperparameters of the model would result in overfitting.</p>
+</div>
+<br>
+</section>
+<section id="convolutional-neural-network">
+<span id="id1"></span><h2>Convolutional Neural Network<a class="headerlink" href="#convolutional-neural-network" title="Link to this heading">#</a></h2>
+<p>A <strong>Convolutional Neural Network (CNN)</strong> is a type of neural network primarly designed for tasks like image recognition and object detection.</p>
+<p>CNNs outperform traditional neural netowrks when working with images becuase:</p>
+<ul class="simple">
+<li><p>They are more efficient, it is too much computation to train large-size images with different channels.</p></li>
+<li><p>They can capture the spatial dependencies of the image.</p></li>
+<li><p>They are not sensitive to the position of the object in the image.</p></li>
+</ul>
+<p>CNNs works in two steps:</p>
+<ul class="simple">
+<li><p><strong>Feature extraction</strong> is a phase where various filters and layers are applied to the images to extract information and features.</p></li>
+<li><p><strong>Classification</strong> is a pahse where the image is classified based on the information extracted.</p></li>
+</ul>
+<br>
+</section>
+<section id="convoultion-layer">
+<span id="id2"></span><h2>Convoultion Layer<a class="headerlink" href="#convoultion-layer" title="Link to this heading">#</a></h2>
+<p>The <strong>convolution layer</strong> extracts different features from the input image by applying different <strong>filters</strong> and producing several <strong>feature maps</strong>.</p>
+<figure class="align-default" id="conv-layer-1">
+<a class="reference internal image-reference" href="../_images/conv-layer-1.png"><img alt="../_images/conv-layer-1.png" src="../_images/conv-layer-1.png" style="width: 340px;" /></a>
+<figcaption>
+<p><span class="caption-text">Convoultional Layer</span><a class="headerlink" href="#conv-layer-1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To understand the math behind convolution layers, we will look at only one filter.</p>
+<figure class="align-default" id="conv-layer-2">
+<a class="reference internal image-reference" href="../_images/conv-layer-2.png"><img alt="../_images/conv-layer-2.png" src="../_images/conv-layer-2.png" style="width: 480px;" /></a>
+<figcaption>
+<p><span class="caption-text">Convoultional Layer 2</span><a class="headerlink" href="#conv-layer-2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To calculate <span class="math notranslate nohighlight">\(m_{11}\)</span>, a fetaure map value, we will multiply the pixel values of the top-left 3 x 3 subregion of the input image with the filter values and add them up (sum product).</p>
+<div class="math notranslate nohighlight">
+\[
+m_{11} = i_{11}f_{11} + i_{12}f_{12} + i_{13}f_{13} + i_{21}f_{21} + i_{22}f_{22} + i_{23}f_{23} + i_{31}f_{31} + i_{32}f_{32} + i_{33}f_{33}
+\]</div>
+<p>To calculate <span class="math notranslate nohighlight">\(m_{12}\)</span>, we will select a 3 x 3 subregion one column to the right.</p>
+<div class="math notranslate nohighlight">
+\[
+m_{12} = i_{12}f_{11} + i_{13}f_{12} + i_{14}f_{13} + i_{22}f_{21} + i_{23}f_{22} + i_{24}f_{23} + i_{32}f_{31} + i_{33}f_{32} + i_{34}f_{33}
+\]</div>
+<p>The rest of the feature map values are calculated moving the 3x3 subregion similarlt. Thus, a convolution can be expressed as:
+$<span class="math notranslate nohighlight">\(
+m_{ij} = {f} \cdot {i}
+\)</span>$</p>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(i\)</span> is the corresponfing subregion of the input</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is the filter</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator for reproducibility</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># intitialize input image randomly</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+
+
+<span class="n">n_filters</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">filter_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># intitialize filters randomly</span>
+<span class="n">filters</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="n">n_filters</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+
+<span class="c1"># dimensions of the feature maps</span>
+<span class="n">map_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># initialize with zeros the feature maps</span>
+<span class="n">maps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_filters</span><span class="p">,</span> <span class="n">map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># apply convolution</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+
+        <span class="c1"># extract the subregion of the input image</span>
+        <span class="n">subregion</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">filter_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="n">filter_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+        <span class="c1"># update feature map at position (i,j) for all filters</span>
+        <span class="n">maps</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="o">@</span> <span class="n">subregion</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># apply ReLU activation</span>
+<span class="n">maps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+
+<span class="n">maps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[0.00, 0.00, 0.00, 0.00],
+         [0.00, 1.47, 0.00, 0.00],
+         [9.72, 0.97, 0.00, 0.00],
+         [0.00, 0.00, 0.00, 1.42]],
+
+        [[2.45, 0.92, 4.97, 2.12],
+         [6.53, 5.38, 0.37, 2.64],
+         [0.00, 0.00, 0.00, 2.39],
+         [0.00, 0.00, 0.44, 0.06]],
+
+        [[0.00, 0.00, 0.00, 0.00],
+         [0.00, 0.00, 0.00, 2.75],
+         [2.06, 2.31, 0.00, 0.00],
+         [0.00, 0.00, 0.00, 0.00]],
+
+        [[0.00, 0.00, 0.00, 0.31],
+         [0.00, 2.52, 0.00, 0.00],
+         [7.90, 0.00, 0.95, 0.00],
+         [3.77, 0.00, 3.10, 0.00]],
+
+        [[1.04, 0.00, 0.00, 0.97],
+         [0.00, 0.00, 0.00, 1.66],
+         [3.67, 0.00, 0.00, 0.00],
+         [0.00, 0.00, 0.00, 0.00]]])
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+</section>
+<section id="pooling-layer">
+<h2>Pooling Layer<a class="headerlink" href="#pooling-layer" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pool_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>       <span class="c1">#  size of the pooling window</span>
+
+<span class="c1"># dimensions of the feature maps after pooling</span>
+<span class="n">pooled_map_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">maps</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">maps</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">//</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># initialize with zeros the pooled feature maps</span>
+<span class="n">pooled_maps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_filters</span><span class="p">,</span> <span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># apply max pooling</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+
+        <span class="c1"># Extract the 2x2 region for max pooling</span>
+        <span class="n">subregions</span> <span class="o">=</span> <span class="n">maps</span><span class="p">[:,</span> 
+                         <span class="n">i</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+                         <span class="n">j</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]:(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        
+        <span class="c1"># Apply max pooling</span>
+        <span class="n">pooled_maps</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">subregions</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_filters</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">pooled_maps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[1.47, 0.00],
+         [9.72, 1.42]],
+
+        [[6.53, 4.97],
+         [0.00, 2.39]],
+
+        [[0.00, 2.75],
+         [2.31, 0.00]],
+
+        [[2.52, 0.31],
+         [7.90, 3.10]],
+
+        [[1.04, 1.66],
+         [3.67, 0.00]]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_filters</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">filter_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">pool_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">500</span>      <span class="c1"># number of neurons in hidden layers</span>
+
+
+<span class="c1"># intitialize filter, weight matrices and bias vectors randomly</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">f1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="n">n_filters</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+
+<span class="n">W1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">4320</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span><span class="o">*</span> <span class="mf">0.01</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+
+<span class="n">W2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="n">n_hidden</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span><span class="o">*</span> <span class="mf">0.01</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+
+<span class="c1"># parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>                     <span class="c1"># track gradients</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of parameters: </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">parameters</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of parameters: 2166260
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_steps</span> <span class="o">=</span> <span class="mi">100</span>   <span class="c1"># train iterations</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.01</span>         <span class="c1"># learning rate</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>   <span class="c1"># number of examples per batch</span>
+
+<span class="n">track_loss</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
+
+    <span class="c1"># batch construct</span>
+    <span class="n">ix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,))</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">train_x</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
+
+    <span class="c1"># apply convolution</span>
+    <span class="n">map_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">batch</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">maps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">,</span> <span class="n">map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+
+            <span class="c1"># extract the subregion for all images in the batch</span>
+            <span class="n">subregion</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="n">filter_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+            <span class="n">maps</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">subregion</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">f1</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">)</span> <span class="c1"># (32, 30, 24, 24) = (32, 25) @ (25, 30)</span>
+    
+    <span class="n">maps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+    
+    <span class="c1"># apply pool</span>
+    <span class="n">pooled_map_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">maps</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">//</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">maps</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">//</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">pooled_maps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">,</span> <span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pooled_map_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+
+            <span class="c1"># extract the subregion for all images in the batch and filters</span>
+            <span class="n">subregion</span> <span class="o">=</span> <span class="n">maps</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">j</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]:(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">pool_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+            <span class="n">pooled_maps</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">subregion</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="c1"># (32, 30, 12, 12)</span>
+    
+    <span class="c1"># forward pass</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">pooled_maps</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span> <span class="c1"># (32, 100) = (32, 4320) x (4320, 100) + (100)</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>                               <span class="c1"># (32, 10) = (32, 100) x (100, 10) + (10)           </span>
+
+    <span class="c1"># calculate loss</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">h2</span><span class="p">,</span> <span class="n">train_y</span><span class="p">[</span><span class="n">ix</span><span class="p">])</span>
+    <span class="n">track_loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">step</span> <span class="o">==</span> <span class="n">max_steps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">max_steps</span><span class="si">}</span><span class="s2">     Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+    <span class="c1"># backward pass</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># update parameters</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  0/100     Loss: 2.5800
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  3/100     Loss: 2.0854
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  6/100     Loss: 2.0032
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  9/100     Loss: 2.0001
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 12/100     Loss: 1.9550
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 15/100     Loss: 1.9839
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 18/100     Loss: 1.8780
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 21/100     Loss: 1.8471
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 24/100     Loss: 1.6872
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 27/100     Loss: 1.9994
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 30/100     Loss: 1.0879
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 33/100     Loss: 1.3514
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 36/100     Loss: 1.4644
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 39/100     Loss: 1.4545
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 42/100     Loss: 1.6063
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 45/100     Loss: 1.1237
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 48/100     Loss: 1.4598
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 51/100     Loss: 1.3692
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 54/100     Loss: 1.3438
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 57/100     Loss: 1.8187
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 60/100     Loss: 1.2903
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 63/100     Loss: 1.3563
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 66/100     Loss: 1.5805
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 69/100     Loss: 1.0881
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 72/100     Loss: 1.3651
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 75/100     Loss: 1.6383
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 78/100     Loss: 1.4661
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 81/100     Loss: 1.3857
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 84/100     Loss: 1.4798
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 87/100     Loss: 1.7056
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 90/100     Loss: 1.3771
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 93/100     Loss: 1.2069
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 96/100     Loss: 1.1568
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 99/100     Loss: 1.7825
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">log</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(2.30)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After Convolution: </span><span class="si">{</span><span class="n">maps</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">, After ReLU: </span><span class="si">{</span><span class="n">maps</span><span class="o">.</span><span class="n">relu</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After Hidden Layer 1: </span><span class="si">{</span><span class="n">h1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">, After Hidden Layer 2: </span><span class="si">{</span><span class="n">h2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After Convolution: 0.6113851070404053, After ReLU: 0.6113851070404053
+After Hidden Layer 1: 0.8096495270729065, After Hidden Layer 2: 0.33643490076065063
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">track_loss</span><span class="p">[</span><span class="mi">10</span><span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16e6bf300c1e962dfdfc1d58cd41c42e8083bd50e7d1465496cc1dce3d2f0265.png" src="../_images/16e6bf300c1e962dfdfc1d58cd41c42e8083bd50e7d1465496cc1dce3d2f0265.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dataset">Import Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">Train, Test, and Validation Splits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-network">Convolutional Neural Network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convoultion-layer">Convoultion Layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-layer">Pooling Layer</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Daniel Simon
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
