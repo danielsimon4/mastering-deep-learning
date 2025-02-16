@@ -2,9 +2,16 @@
 
 <br>
 
+**Link to the Online Book:**
+
+[https://danielsimon4.github.io/mastering-deep-learning/](https://danielsimon4.github.io/mastering-deep-learning/)
+
+
+<br>
+
 **How to Cite This Work:**
 
-Simon, D. (2025). *Mastering Deep Learning: From Neural Networks to Transformers*. [https://danielsimon4.github.io/deep-learning-book/](https://danielsimon4.github.io/deep-learning-book/)
+Simon, D. (2025). *Mastering Deep Learning: From Neural Networks to Transformers*. [https://danielsimon4.github.io/mastering-deep-learning/](https://danielsimon4.github.io/mastering-deep-learning/)
 
 <br>
 
