@@ -34,10 +34,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a0a3bb93" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7cf5026b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -213,7 +213,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/danielsimon4/deep-learning-book" target="_blank"
+<a href="https://github.com/danielsimon4/mastering-deep-learning" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -302,7 +302,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -318,6 +320,20 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mnist-dataset">4.1. MNIST dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">4.2. Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">4.3. Train, Test, and Validation Splits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten">4.4. Flatten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nn-module-nn-sequential-and-nn-layers">4.5. nn.Module, nn.Sequential and nn.Layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">4.6. Overfitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">4.7. Confusion Matrix</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -329,16 +345,460 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="image-recognition">
 <h1><span class="section-number">4. </span>Image Recognition<a class="headerlink" href="#image-recognition" title="Link to this heading">#</a></h1>
-<br>
-<br>
-<p><strong>This chapter will be available soon!</strong> 🛠️</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br></section>
+<section id="mnist-dataset">
+<h2><span class="section-number">4.1. </span>MNIST dataset<a class="headerlink" href="#mnist-dataset" title="Link to this heading">#</a></h2>
+<p>        So far, we have only used the 60,000 training images of the <a class="reference external" href="https://huggingface.co/datasets/ylecun/mnist">MNIST dataset</a>. But, we have not talked about how this images have been imported and preprocessed to be used in our neural network.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the MNIST dataset</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;ylecun/mnist&quot;</span><span class="p">)</span>
+<span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatasetDict({
+    train: Dataset({
+        features: [&#39;image&#39;, &#39;label&#39;],
+        num_rows: 60000
+    })
+    test: Dataset({
+        features: [&#39;image&#39;, &#39;label&#39;],
+        num_rows: 10000
+    })
+})
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on the dataset structure, we can access the images like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_image</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+<span class="n">first_image</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1aecaa0e99943d77fdcef47a591e7b7bec750f410d70173827b2ef2de23db56c.png" src="../_images/1aecaa0e99943d77fdcef47a591e7b7bec750f410d70173827b2ef2de23db56c.png" />
+</div>
+</div>
+<p>Please note that the images in the dataset are in PIL (Python Imaging Library) format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">first_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PIL.PngImagePlugin.PngImageFile
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-preprocessing">
+<h2><span class="section-number">4.2. </span>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
+<p>Usually, the collected data is not immediately ready to be the input of a machine learning model. The steps taken to clean and prepare the data are known as <strong>data preprocessing</strong>. When working with PIL images in deep learning, the typical workflow involves converting them first to NumPy arrays and then, to normalized PyTorch tensors.</p>
+<p>Suppose we have the following 4x4 PIL image:</p>
+<figure class="align-default" id="image-example">
+<a class="reference internal image-reference" href="../_images/image-example.png"><img alt="../_images/image-example.png" src="../_images/image-example.png" style="width: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">4x4 PIL image</span><a class="headerlink" href="#image-example" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>When we convert this image to a NumPy array, each pixel value ranges from 0 (black) to 255 (white), with intermediate values representing varying shades of gray.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">42</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mi">42</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">213</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">255</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>Neural networks perform better when when we <strong>normalize</strong> the input values so that they fall within the range [0, 1]. To do this, we divide each pixel value by 255, so values range from 0 (black) to 1 (white).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.1647</span><span class="p">,</span> <span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.1647</span><span class="p">,</span> <span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">,</span> <span class="mf">0.8353</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">,</span> <span class="mf">0.8353</span><span class="p">,</span> <span class="mf">1.0000</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>We will create the function <code class="docutils literal notranslate"><span class="pre">preprocess_data</span></code> to apply these transformations to all the images in the train and test datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert PIL image to normalized PyToch tensor</span>
+<span class="k">def</span> <span class="nf">image_to_tensor</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">))</span> <span class="o">/</span> <span class="mf">255.0</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_data</span><span class="p">(</span><span class="n">split</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list to store image tensors</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list to store labels</span>
+
+    <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">split</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_to_tensor</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="c1"># preprocess the train and test datasets</span>
+<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])</span>
+<span class="n">test_x</span><span class="p">,</span>  <span class="n">test_y</span>  <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-test-and-validation-splits">
+<h2><span class="section-number">4.3. </span>Train, Test, and Validation Splits<a class="headerlink" href="#train-test-and-validation-splits" title="Link to this heading">#</a></h2>
+<p>When working with neural networks, it is common practice to divide the dataset into three splits:</p>
+<ul class="simple">
+<li><p>The <strong>train split</strong> (80% of the dataset) is used to optimize the model parameters during training.</p></li>
+<li><p>The <strong>validation split</strong> (10% of the dataset) is used to help us adjust the hyperparameters of the model, such as the size of the hidden layer, embedding size, and regularization strength.</p></li>
+<li><p>The <strong>test split</strong> (10% of the dataset) is used to evaluate the final model’s performance.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The test split should be used only after the model is fully optimized, as its goal is to evaluate the final model’s performance. Using the test split to help us adjust the hyperparameters of the model would result in overfitting.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split test data into validation and test data</span>
+<span class="n">val_x</span> <span class="o">=</span> <span class="n">test_x</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span>
+<span class="n">val_y</span> <span class="o">=</span> <span class="n">test_y</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">test_x</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">test_y</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Splits         Images              Labels
+--------------------------------------------------
+Train          (60000, 28, 28)     [60000]
+Validation     (5000, 28, 28)      [5000]
+Test           (5000, 28, 28)      [5000]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_x</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">val_x</span> <span class="o">=</span> <span class="n">val_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">test_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="flatten">
+<h2><span class="section-number">4.4. </span>Flatten<a class="headerlink" href="#flatten" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Splits&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="s1">&#39;Images&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="s1">&#39;Labels&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Train&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Validation&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">val_x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">val_y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Test&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">test_x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">test_y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Splits         Images              Labels
+--------------------------------------------------
+Train          (60000, 784)        [60000]
+Validation     (5000, 784)         [5000]
+Test           (5000, 784)         [5000]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="nn-module-nn-sequential-and-nn-layers">
+<h2><span class="section-number">4.5. </span>nn.Module, nn.Sequential and nn.Layers<a class="headerlink" href="#nn-module-nn-sequential-and-nn-layers" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">Module</span><span class="p">,</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Linear</span><span class="p">,</span> <span class="n">BatchNorm1d</span><span class="p">,</span> <span class="n">Tanh</span>
+
+<span class="k">class</span> <span class="nc">PrevNN</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_hidden</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">Linear</span><span class="p">(</span>     <span class="mi">784</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span>       <span class="mi">10</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">get_batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+    <span class="n">ix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60000</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,))</span>
+    <span class="k">return</span> <span class="n">train_x</span><span class="p">[</span><span class="n">ix</span><span class="p">],</span> <span class="n">train_y</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
+
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">calculate_loss</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="c1"># put the model in evaluation mode</span>
+
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">train_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">))</span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">val_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">))</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">val_y</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span> <span class="c1"># put the model back in train mode</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">     Train Loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">     Val Loss: </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hyperparameters</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">200</span>        <span class="c1"># train iterations</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>           <span class="c1"># learning rate</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">eval_interval</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># every how many iterations calculate the loss</span>
+
+<span class="n">loss_graph</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># initialize the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">PrevNN</span><span class="p">(</span><span class="n">n_hidden</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># create a PyTorch optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">eval_interval</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">step</span> <span class="o">==</span> <span class="n">steps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">calculate_loss</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    
+    <span class="c1"># sample a batch of the dataa</span>
+    <span class="n">Xb</span><span class="p">,</span> <span class="n">Yb</span> <span class="o">=</span> <span class="n">get_batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+
+    <span class="c1"># forward pass</span>
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Xb</span><span class="p">)</span>
+
+    <span class="c1"># calculate loss</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">Yb</span><span class="p">)</span>
+
+    <span class="c1"># backward pass</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">(</span><span class="n">set_to_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># update parameters</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:   0/200     Train Loss: 2.3025     Val Loss: 2.3029
+Step:  10/200     Train Loss: 1.8548     Val Loss: 1.8793
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  20/200     Train Loss: 1.1340     Val Loss: 1.1651
+Step:  30/200     Train Loss: 0.8090     Val Loss: 0.8728
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  40/200     Train Loss: 0.6876     Val Loss: 0.7610
+Step:  50/200     Train Loss: 0.5811     Val Loss: 0.6504
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  60/200     Train Loss: 0.5408     Val Loss: 0.6163
+Step:  70/200     Train Loss: 0.4758     Val Loss: 0.5306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  80/200     Train Loss: 0.4638     Val Loss: 0.5336
+Step:  90/200     Train Loss: 0.4430     Val Loss: 0.5222
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 100/200     Train Loss: 0.4217     Val Loss: 0.5046
+Step: 110/200     Train Loss: 0.4239     Val Loss: 0.5041
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 120/200     Train Loss: 0.4530     Val Loss: 0.5237
+Step: 130/200     Train Loss: 0.4014     Val Loss: 0.4617
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 140/200     Train Loss: 0.3986     Val Loss: 0.4731
+Step: 150/200     Train Loss: 0.4193     Val Loss: 0.4907
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 160/200     Train Loss: 0.3899     Val Loss: 0.4618
+Step: 170/200     Train Loss: 0.3668     Val Loss: 0.4357
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 180/200     Train Loss: 0.3476     Val Loss: 0.4083
+Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 199/200     Train Loss: 0.3376     Val Loss: 0.3947
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="overfitting">
+<h2><span class="section-number">4.6. </span>Overfitting<a class="headerlink" href="#overfitting" title="Link to this heading">#</a></h2>
+</section>
+<section id="confusion-matrix">
+<h2><span class="section-number">4.7. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logits</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([32, 10])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logits</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 1.9882e+00, -9.4943e-01, -3.8419e+00, -1.2989e+00,  1.5122e+00,
+         -1.1864e+00, -1.9441e-01,  2.8263e+00, -1.6137e+00,  3.1481e+00],
+        [ 1.1921e+00, -1.5169e+00,  1.0737e+00,  5.2271e+00, -2.7173e+00,
+          1.7100e+00, -1.7092e+00, -1.2392e+00,  4.8283e-01, -2.2560e+00],
+        [ 5.3646e-01, -4.8777e-01, -1.9512e-01, -1.1317e+00,  2.9474e+00,
+          1.6112e+00,  1.6530e+00, -1.8989e+00, -1.3221e+00, -8.8320e-01],
+        [-3.7312e-01,  4.3645e-01, -2.1208e+00, -9.2221e-01,  4.9167e+00,
+         -2.1482e+00,  6.6714e-01,  2.3431e-01, -1.9741e+00,  1.8540e+00],
+        [ 2.0837e+00, -9.6585e-01, -2.8289e+00, -1.2908e+00,  1.0533e+00,
+          4.3892e+00, -6.7079e-01, -1.3808e+00, -2.2676e-01,  6.7246e-01],
+        [-2.0146e-01, -5.7268e-02, -1.6256e+00, -4.9399e+00,  4.5870e+00,
+         -1.3296e-01,  1.1907e+00,  5.6190e-01, -6.2666e-01,  1.5079e+00],
+        [ 1.8141e+00, -9.3311e-01, -3.2291e+00,  4.2658e-01, -1.4474e-01,
+          4.2558e+00, -9.7067e-02, -2.5879e+00,  1.6741e+00, -2.1868e-01],
+        [ 8.8783e-01, -1.1872e+00,  4.9470e-01,  2.0971e-01, -2.2021e+00,
+         -1.4110e+00, -1.8509e+00,  5.3344e+00, -1.7560e+00, -1.5493e-01],
+        [-2.8450e+00, -1.7980e-01, -1.9195e+00, -1.3788e+00,  2.0832e-01,
+          1.1231e+00, -1.3783e+00,  2.5755e-01,  2.5883e+00,  4.0577e+00],
+        [-2.2468e+00,  4.4798e+00,  1.1074e+00, -5.0345e-01, -7.4793e-01,
+         -4.5904e-01, -1.3878e+00,  3.9644e-01, -5.6527e-01, -1.6069e+00],
+        [-2.4611e+00,  4.4314e+00,  1.3791e+00, -5.4446e-01, -2.1747e+00,
+          6.9312e-01,  1.0058e+00, -1.6492e+00,  4.1500e-01, -1.9253e+00],
+        [ 1.7685e+00, -9.8693e-01,  1.1658e+00,  9.5148e-01, -4.1232e+00,
+          1.4455e+00,  8.4940e-01, -2.2033e+00,  2.8252e+00, -8.8771e-01],
+        [-1.1223e+00, -1.6636e+00,  2.7809e+00,  3.0760e-01, -2.3656e+00,
+          1.9951e-01, -1.0769e+00, -4.9333e-01,  3.9822e+00, -5.9205e-01],
+        [ 6.0833e+00, -1.3399e+00, -4.1179e-01, -1.0297e-01,  2.4020e-01,
+          6.3703e-01, -1.4114e+00,  1.6938e-01, -2.5645e+00, -5.6934e-01],
+        [-4.6543e+00, -5.2461e-01, -1.1036e+00,  3.4026e-02,  3.5246e+00,
+          7.5376e-01, -4.7516e-02, -4.2231e-01,  1.0507e+00,  1.2969e+00],
+        [ 9.9151e-01, -1.0503e+00,  1.8653e-01, -1.4934e+00,  1.8964e+00,
+          5.2192e-01,  3.7824e+00, -2.5559e-01, -2.4134e+00, -1.9460e+00],
+        [-1.9583e+00,  4.3331e+00,  1.5144e+00,  3.9582e-01, -2.9746e+00,
+          1.4123e-01,  4.1084e-01, -8.5242e-01, -6.5198e-01, -1.5737e+00],
+        [ 2.3225e+00, -4.6264e-01, -1.2939e+00, -2.2431e+00, -3.8230e-01,
+         -1.8366e+00, -9.8516e-01,  4.7917e+00, -7.7113e-01,  5.6142e-02],
+        [-9.4309e-01, -4.0806e-01, -2.6262e+00, -1.4213e+00,  3.1936e-01,
+         -7.4968e-01, -1.4049e+00,  2.0093e+00,  4.1258e-01,  5.7630e+00],
+        [-2.4000e+00, -1.3915e+00,  8.4780e-01,  5.8726e+00, -4.3977e-01,
+         -4.8357e-01, -1.2945e+00, -4.0507e-01,  2.6933e-01, -5.1288e-01],
+        [-2.4879e+00, -1.5906e+00, -3.4926e-02, -1.6296e+00,  4.9407e+00,
+         -5.3139e-02,  1.3264e-01, -6.3258e-01,  9.6925e-01,  8.8023e-01],
+        [-9.6063e-01,  3.9910e+00,  2.0408e+00, -1.4875e-01, -3.9310e+00,
+          3.0614e-01, -1.2578e-01, -7.7372e-01,  4.3715e-01, -2.0437e+00],
+        [-4.8100e-01,  5.2112e-01,  6.8691e-01, -3.1136e+00,  8.5895e-01,
+         -1.3533e+00,  6.1434e+00, -1.4944e+00, -6.2019e-03, -6.7228e-01],
+        [ 1.5791e-01, -6.1082e-02,  3.5181e+00,  2.4544e+00, -1.4989e+00,
+          3.7097e-01,  5.0665e-01, -1.2226e+00, -2.2836e-01, -4.7899e+00],
+        [-1.6318e+00,  2.9904e+00,  1.4896e+00,  1.4261e+00, -3.1201e+00,
+         -7.6580e-01, -2.0512e+00,  1.3998e+00, -2.6515e-01, -1.2144e+00],
+        [ 3.7234e-02, -6.6306e-02,  2.4874e-01,  2.8114e+00, -1.6259e+00,
+         -4.1395e-02, -3.2271e+00, -1.5330e+00,  4.1122e+00, -3.5793e-02],
+        [-7.7184e-01, -1.3761e+00, -4.6135e-01,  6.4448e+00, -1.6890e+00,
+          6.9805e-01, -2.1250e+00,  1.9349e-01, -4.1757e-01, -6.0809e-01],
+        [ 7.2668e+00, -1.6518e+00, -7.5354e-01, -3.2789e-01, -8.0195e-01,
+          1.0826e+00, -5.4170e-01, -2.4315e-01, -1.8420e+00, -1.1360e+00],
+        [-2.6253e+00, -4.4264e-01, -2.4843e+00, -1.4015e-01,  8.9754e-01,
+         -3.5707e-01, -1.6755e+00,  1.4268e+00,  9.4652e-01,  5.1017e+00],
+        [ 2.5936e-02,  3.7437e-01, -2.1889e-01, -2.6658e+00,  6.9921e-01,
+         -1.3878e+00,  5.9728e+00, -1.1598e+00, -3.3416e-01,  3.5584e-02],
+        [-2.3348e-01, -3.6203e-01,  5.0616e+00,  6.7772e-01, -2.3542e-01,
+         -8.4518e-01,  1.9723e+00, -1.4870e+00, -8.0365e-01, -3.6767e+00],
+        [-7.9684e-01, -1.1692e+00,  1.9618e+00, -1.2542e+00,  8.3013e-01,
+         -3.2775e+00, -6.0593e-01,  1.0798e+00,  6.1948e-01,  3.5763e+00]],
+       grad_fn=&lt;MmBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pred</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([9, 3, 4, 4, 5, 4, 5, 7, 9, 1, 1, 8, 8, 0, 4, 6, 1, 7, 9, 3, 4, 1, 6, 2,
+        1, 8, 3, 0, 9, 6, 2, 9])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Yb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([7, 3, 5, 4, 5, 4, 5, 7, 9, 1, 1, 8, 8, 0, 4, 6, 1, 7, 9, 3, 4, 1, 6, 5,
+        1, 8, 3, 0, 9, 6, 2, 9])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_matrix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Yb</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="n">conf_matrix</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">conf_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 5, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 4, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 1, 2, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 2, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 3, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 4]], dtype=torch.int32)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -394,6 +854,28 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mnist-dataset">4.1. MNIST dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">4.2. Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">4.3. Train, Test, and Validation Splits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten">4.4. Flatten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nn-module-nn-sequential-and-nn-layers">4.5. nn.Module, nn.Sequential and nn.Layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">4.6. Overfitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">4.7. Confusion Matrix</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

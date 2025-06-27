@@ -34,10 +34,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a0a3bb93" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7cf5026b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -215,7 +215,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/danielsimon4/deep-learning-book" target="_blank"
+<a href="https://github.com/danielsimon4/mastering-deep-learning" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -328,12 +328,13 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">3.1. PyTorch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches">3.2. Batches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-softmax">3.3. Saturated Softmax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-tanh">3.4. Saturated Tanh</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaiming-initialization">3.5. Kaiming Initialization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">3.6. Vanishing Gradient</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization">3.7. Batch Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-softmax">3.2. Saturated Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches">3.3. Batches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.4. Saturated Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-tanh">3.5. Saturated Tanh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaiming-initialization">3.6. Kaiming Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">3.7. Vanishing Gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization">3.8. Batch Normalization</a></li>
 </ul>
             </nav>
         </div>
@@ -351,7 +352,11 @@
 </div>
 <section id="pytorch">
 <h2><span class="section-number">3.1. </span>PyTorch<a class="headerlink" href="#pytorch" title="Link to this heading">#</a></h2>
-<p>        We can simplify the implementation of the neural network from the previous chapter using PyTorch functions. When initializing our neural network, we will set <code class="docutils literal notranslate"><span class="pre">p.requires_grad</span> <span class="pre">=</span> <span class="pre">True</span></code> to instruct PyTorch to track the gradient of the loss for those parameters. This enables us to use <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> during the backward pass to calculate the gradient automatically. Additionally, we can use <code class="docutils literal notranslate"><span class="pre">F.cross_entropy()</span></code>, which efficiently applies Softmax and the average NLL.</p>
+<p>We can simplify the implementation of our neural networks using PyTorch functions:</p>
+<ul class="simple">
+<li><p>We can use <code class="docutils literal notranslate"><span class="pre">p.requires_grad</span> <span class="pre">=</span> <span class="pre">True</span></code> to instruct PyTorch to track the gradient of the loss for those parameters. This enables us to use <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> during the backward pass to calculate the gradient automatically.</p></li>
+<li><p>We can use <code class="docutils literal notranslate"><span class="pre">F.cross_entropy()</span></code>, which efficiently applies Softmax and the average NLL.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize_nn</span><span class="p">(</span><span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
@@ -368,7 +373,7 @@
     <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">W3</span><span class="p">,</span> <span class="n">b3</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># keep track of gradient</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># track the gradient</span>
         
     <span class="k">return</span> <span class="n">parameters</span>
 </pre></div>
@@ -377,14 +382,15 @@
 </div>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># train iterations</span>
-<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>           <span class="c1"># learning rate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyperparameters</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1"># Number of times the dataset is fully seen</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>            <span class="c1"># Learning rate</span>
 
-<span class="n">loss_graph</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="c1"># intialize neural network</span>
+<span class="c1"># Intialize neural network</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="n">initialize_nn</span><span class="p">()</span>
 <span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">W3</span><span class="p">,</span> <span class="n">b3</span> <span class="o">=</span> <span class="n">parameters</span>
+
 
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
     
@@ -392,13 +398,10 @@
     <span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>
     <span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>
     <span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>
-    
+
     <span class="c1"># calculate loss</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
-    <span class="n">loss_graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="n">epochs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step: </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2">     Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span> <span class="c1"># Softmax + Average NNL</span>
+
     <span class="c1"># backward pass</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
         <span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="kc">None</span>       <span class="c1"># reset gradient</span>
@@ -407,6 +410,9 @@
     <span class="c1"># update parameters</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
         <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span>
+
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="n">epochs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step: </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2">     Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -452,7 +458,7 @@
 </div>
 </details>
 </div>
-<p>As shown in the graph below, the loss consistently decreased in each epoch.</p>
+<p>        As shown in the graph below, the neural network is progressively reducing the loss, and therefore learning. However, it is currently facing several issues that are hindering its learning process.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -469,12 +475,29 @@
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/8aa990723ebc7446b3f23f1c802e271044fcf462ad285832f5da271027d3665e.png" src="../_images/8aa990723ebc7446b3f23f1c802e271044fcf462ad285832f5da271027d3665e.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_graph</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">);</span>
+
+<span class="ne">NameError</span>: name &#39;loss_graph&#39; is not defined
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 400x200 with 0 Axes&gt;
+</pre></div>
+</div>
 </div>
 </div>
 </section>
+<section id="saturated-softmax">
+<h2><span class="section-number">3.2. </span>Saturated Softmax<a class="headerlink" href="#saturated-softmax" title="Link to this heading">#</a></h2>
+<p>To identify and address these issues, we will perform a single training iteration slightly modifying the code to track the pre-activations and the gradients of each layer.</p>
+</section>
 <section id="batches">
-<h2><span class="section-number">3.2. </span>Batches<a class="headerlink" href="#batches" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Batches<a class="headerlink" href="#batches" title="Link to this heading">#</a></h2>
 <p>        The neural network was progressively reducing the loss, and therefore learning. However, each epoch took a considerable amount of time because processing the entire dataset of 60,000 images is computationally expensive. To address this issue, in each iteration we will use a <strong>batch</strong>, a small randomly selected subset of the training dataset.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -486,58 +509,97 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">steps</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1"># train iterations</span>
-<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>           <span class="c1"># learning rate</span>
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyperparameters</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>         <span class="c1"># Number of times the dataset is fully seen</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>     <span class="c1"># Number images per mini-batch</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>            <span class="c1"># Learning rate</span>
 
-<span class="n">loss_graph</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">loss_graph</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="n">batch_size</span>  <span class="c1"># Number of mini-batches</span>
 
-<span class="c1"># intialize neural network</span>
+<span class="c1"># Initialize neural network</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="n">initialize_nn</span><span class="p">()</span>
 <span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">W3</span><span class="p">,</span> <span class="n">b3</span> <span class="o">=</span> <span class="n">parameters</span>
 
-<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
-    
-    <span class="c1"># batch construction</span>
-    <span class="n">ix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">Xb</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
-    <span class="n">Yb</span> <span class="o">=</span> <span class="n">train_y</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
-    
-    <span class="c1"># forward pass</span>
-    <span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">Xb</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>  <span class="c1"># (32, 100) = (32, 784) x (784, 100) + (100)</span>
-    <span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>  <span class="c1"># (32, 100) = (32, 100) x (100, 100) + (100)</span>
-    <span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>          <span class="c1"># (32,  10) = (32, 100) x (100,  10) + (10)</span>
-    
-    <span class="c1"># calculate loss</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">Yb</span><span class="p">)</span>
-    <span class="n">loss_graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
-    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">step</span> <span class="o">==</span> <span class="n">steps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">     Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        
-    <span class="c1"># backward pass</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
 
-    <span class="c1"># update parameters</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span>
+    <span class="c1"># Shuffle dataset at the start of each epoch</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">X_shuffled</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+    <span class="n">Y_shuffled</span> <span class="o">=</span> <span class="n">train_y</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+    <span class="n">epoch_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+
+        <span class="c1"># Create mini-batch</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">step</span> <span class="o">*</span> <span class="n">batch_size</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">batch_size</span>
+        <span class="n">Xb</span> <span class="o">=</span> <span class="n">X_shuffled</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="n">Yb</span> <span class="o">=</span> <span class="n">Y_shuffled</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+
+        <span class="c1"># forward pass</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">Xb</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>  <span class="c1"># (32, 100) = (32, 784) x (784, 100) + (100)</span>
+        <span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>  <span class="c1"># (32, 100) = (32, 100) x (100, 100) + (100)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>          <span class="c1"># (32,  10) = (32, 100) x (100,  10) + (10)</span>
+        
+        <span class="c1"># calculate loss</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">Yb</span><span class="p">)</span>
+        <span class="n">epoch_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># Accumulate loss</span>
+
+        <span class="c1"># Compute predictions</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Get the class with highest score</span>
+        <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predictions</span> <span class="o">==</span> <span class="n">Yb</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  
+
+        <span class="c1"># backward pass</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="c1"># update parameters</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span>
+
+    <span class="c1"># Compute and store average epoch loss</span>
+    <span class="n">avg_loss</span> <span class="o">=</span> <span class="n">epoch_loss</span> <span class="o">/</span> <span class="n">steps</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="n">loss_graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avg_loss</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2">    Loss: </span><span class="si">{</span><span class="n">avg_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">    Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  0/100     Loss: 19.2715
-Step: 10/100     Loss: 9.7469
-Step: 20/100     Loss: 9.2240
-Step: 30/100     Loss: 7.1574
-Step: 40/100     Loss: 5.5388
-Step: 50/100     Loss: 3.6040
-Step: 60/100     Loss: 3.6486
-Step: 70/100     Loss: 5.2210
-Step: 80/100     Loss: 3.3407
-Step: 90/100     Loss: 2.6224
-Step: 99/100     Loss: 3.0554
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  1/10    Loss: 1.4916    Accuracy: 71.62%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  2/10    Loss: 0.5690    Accuracy: 83.68%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  3/10    Loss: 0.4400    Accuracy: 86.81%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  4/10    Loss: 0.3716    Accuracy: 88.70%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  5/10    Loss: 0.3267    Accuracy: 89.98%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  6/10    Loss: 0.2958    Accuracy: 90.97%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  7/10    Loss: 0.2693    Accuracy: 91.63%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  8/10    Loss: 0.2474    Accuracy: 92.41%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  9/10    Loss: 0.2299    Accuracy: 92.94%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 10/10    Loss: 0.2158    Accuracy: 93.34%
 </pre></div>
 </div>
 </div>
@@ -559,7 +621,7 @@ Step: 99/100     Loss: 3.0554
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/cf28ff1ffa05d53e197d8af112c0d318d2c30df3e25b884e8d15b8cb895b2159.png" src="../_images/cf28ff1ffa05d53e197d8af112c0d318d2c30df3e25b884e8d15b8cb895b2159.png" />
+<img alt="../_images/6a38bb1576a56fb29b3d62fc82b0f698a9aa30239c4f5e97feb9b105ef6313b7.png" src="../_images/6a38bb1576a56fb29b3d62fc82b0f698a9aa30239c4f5e97feb9b105ef6313b7.png" />
 </div>
 </div>
 <p>The loss we are seeing is the loss of each batch. To compute the train loss we have to use the whole train dataset.</p>
@@ -582,14 +644,14 @@ Step: 99/100     Loss: 3.0554
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train Loss: 3.3288
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train Loss: 0.1951
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="saturated-softmax">
-<h2><span class="section-number">3.3. </span>Saturated Softmax<a class="headerlink" href="#saturated-softmax" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h2><span class="section-number">3.4. </span>Saturated Softmax<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>        Our neural network is facing several issues that are hindering its learning process. To identify and address these issues, we will perform a single training iteration slightly modifying the code to track the pre-activations and the gradients of each layer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -722,12 +784,12 @@ Step: 99/100     Loss: 3.0554
 </div>
 </section>
 <section id="saturated-tanh">
-<h2><span class="section-number">3.4. </span>Saturated Tanh<a class="headerlink" href="#saturated-tanh" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>Saturated Tanh<a class="headerlink" href="#saturated-tanh" title="Link to this heading">#</a></h2>
 <p>The Tanh activation function becomes saturated when neuron pre-activations are extremely positive or negative. In such cases, the Tanh function returns activations that are approximately 1 and -1, as shown in the graph below:</p>
 <figure class="align-default" id="tanh">
 <a class="reference internal image-reference" href="../_images/tanh.png"><img alt="../_images/tanh.png" src="../_images/tanh.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">tanh (Hyperbolic Tangent). Source: <span id="id1">[<a class="reference internal" href="references.html#id3" title="Eric W. Weisstein. Hyperbolic tangent. URL: https://mathworld.wolfram.com/HyperbolicTangent.html.">Wei</a>]</span></span><a class="headerlink" href="#tanh" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">tanh (Hyperbolic Tangent). Source: <span id="id2">[<a class="reference internal" href="references.html#id3" title="Eric W. Weisstein. Hyperbolic tangent. URL: https://mathworld.wolfram.com/HyperbolicTangent.html.">Wei</a>]</span></span><a class="headerlink" href="#tanh" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Approximately 1 and -1 activations make the gradient approximately 0 when we backpropagate through Tanh:</p>
@@ -786,7 +848,7 @@ h1 = tanh(h1\_pre) \quad \Rightarrow \quad dh1\_pre = (1 - (h1)^2) \cdot dh1
 </div>
 </section>
 <section id="kaiming-initialization">
-<h2><span class="section-number">3.5. </span>Kaiming Initialization<a class="headerlink" href="#kaiming-initialization" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>Kaiming Initialization<a class="headerlink" href="#kaiming-initialization" title="Link to this heading">#</a></h2>
 <p><strong>Kaiming initialization</strong>, also known as He initialization, is a method for initializing neural network weights to avoid excessively large or small pre-activations. It was introduced in the paper <a class="reference external" href="https://arxiv.org/pdf/1502.01852">He et al. (2015). <em>Delving Deep into Rectifiers</em></a>. Kaiming initialization adjusts the weights using a scaling factor determined by the activation function’s gain and the number of inputs to the neuron, <span class="math notranslate nohighlight">\(fan\_in\)</span>.</p>
 <br>
 <div class="math notranslate nohighlight">
@@ -867,7 +929,7 @@ W \sim \frac{\text{gain}}{\sqrt{fan\_in}}
 </div>
 </section>
 <section id="vanishing-gradient">
-<h2><span class="section-number">3.6. </span>Vanishing Gradient<a class="headerlink" href="#vanishing-gradient" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.7. </span>Vanishing Gradient<a class="headerlink" href="#vanishing-gradient" title="Link to this heading">#</a></h2>
 <p>        Please note in the gradient graph that the gradient of the loss with respect to the second layer’s pre-activations is smaller than the gradient of the loss with respect to the first layer’s pre-activations. This phenomenon, known as the <strong>vanishing gradient</strong> problem, is an issue because the first layer is learning faster than the second layer. As the network depth increases, this problem becomes more pronounced.</p>
 <p>        To check this, we will now construct a deeper neural network consisting of four hidden layers. From now on, instead of using tensors to build our networks, we will take a modular approach. We will our neural networks using different layers as building blocks that are stacked. Thus, we will adopt an object-oriented programming approach and create classes for each type of layer, enabling a more flexible and scalable neural network design.</p>
 <div class="cell docutils container">
@@ -1018,7 +1080,7 @@ W \sim \frac{\text{gain}}{\sqrt{fan\_in}}
 </div>
 </section>
 <section id="batch-normalization">
-<h2><span class="section-number">3.7. </span>Batch Normalization<a class="headerlink" href="#batch-normalization" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.8. </span>Batch Normalization<a class="headerlink" href="#batch-normalization" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BatchNorm1d</span><span class="p">:</span>
@@ -1216,12 +1278,13 @@ W \sim \frac{\text{gain}}{\sqrt{fan\_in}}
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">3.1. PyTorch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches">3.2. Batches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-softmax">3.3. Saturated Softmax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-tanh">3.4. Saturated Tanh</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaiming-initialization">3.5. Kaiming Initialization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">3.6. Vanishing Gradient</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization">3.7. Batch Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-softmax">3.2. Saturated Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches">3.3. Batches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.4. Saturated Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturated-tanh">3.5. Saturated Tanh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaiming-initialization">3.6. Kaiming Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">3.7. Vanishing Gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization">3.8. Batch Normalization</a></li>
 </ul>
   </nav></div>
 

@@ -34,10 +34,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a0a3bb93" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7cf5026b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -215,7 +215,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/danielsimon4/deep-learning-book" target="_blank"
+<a href="https://github.com/danielsimon4/mastering-deep-learning" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -481,6 +481,29 @@
 <p class="admonition-title">Important</p>
 <p>The test split should be used only after the model is fully optimized, as its goal is to evaluate the model’s performance on new data. Attempting to improve the test loss adjusting the hyperparameters of the model would result in overfitting.</p>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split test data into validation and test data</span>
+<span class="n">val_x</span> <span class="o">=</span> <span class="n">test_x</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span>
+<span class="n">val_y</span> <span class="o">=</span> <span class="n">test_y</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span>
+<span class="n">test_images</span> <span class="o">=</span> <span class="n">test_x</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
+<span class="n">test_labels</span> <span class="o">=</span> <span class="n">test_y</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training images shape:&quot;</span><span class="p">,</span> <span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation images shape:&quot;</span><span class="p">,</span> <span class="n">val_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing images shape:&quot;</span><span class="p">,</span> <span class="n">test_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training images shape: torch.Size([60000, 28, 28])
+Validation images shape: torch.Size([5000, 28, 28])
+Testing images shape: torch.Size([10000, 28, 28])
+</pre></div>
+</div>
+</div>
+</div>
 <br>
 </section>
 <section id="convolutional-neural-network">
@@ -685,6 +708,9 @@ m_{ij} = {f} \cdot {i}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of parameters: 2166260
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -751,106 +777,106 @@ m_{ij} = {f} \cdot {i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  0/100     Loss: 2.5800
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  0/100     Loss: 2.4945
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  3/100     Loss: 2.0854
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  3/100     Loss: 2.2958
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  6/100     Loss: 2.0032
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  6/100     Loss: 2.1947
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  9/100     Loss: 2.0001
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  9/100     Loss: 1.9601
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 12/100     Loss: 1.9550
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 12/100     Loss: 1.9216
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 15/100     Loss: 1.9839
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 15/100     Loss: 1.9271
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 18/100     Loss: 1.8780
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 18/100     Loss: 1.8477
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 21/100     Loss: 1.8471
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 21/100     Loss: 1.9184
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 24/100     Loss: 1.6872
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 24/100     Loss: 1.6113
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 27/100     Loss: 1.9994
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 27/100     Loss: 1.7094
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 30/100     Loss: 1.0879
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 30/100     Loss: 1.7386
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 33/100     Loss: 1.3514
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 33/100     Loss: 1.5177
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 36/100     Loss: 1.4644
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 36/100     Loss: 1.6957
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 39/100     Loss: 1.4545
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 39/100     Loss: 1.3933
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 42/100     Loss: 1.6063
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 42/100     Loss: 1.7147
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 45/100     Loss: 1.1237
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 45/100     Loss: 1.2620
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 48/100     Loss: 1.4598
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 48/100     Loss: 1.3931
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 51/100     Loss: 1.3692
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 51/100     Loss: 1.6000
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 54/100     Loss: 1.3438
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 54/100     Loss: 1.3583
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 57/100     Loss: 1.8187
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 57/100     Loss: 1.1831
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 60/100     Loss: 1.2903
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 60/100     Loss: 1.1852
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 63/100     Loss: 1.3563
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 63/100     Loss: 1.1282
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 66/100     Loss: 1.5805
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 66/100     Loss: 1.3918
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 69/100     Loss: 1.0881
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 69/100     Loss: 1.4681
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 72/100     Loss: 1.3651
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 72/100     Loss: 1.0657
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 75/100     Loss: 1.6383
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 75/100     Loss: 1.1401
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 78/100     Loss: 1.4661
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 78/100     Loss: 1.6007
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 81/100     Loss: 1.3857
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 81/100     Loss: 1.1144
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 84/100     Loss: 1.4798
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 84/100     Loss: 1.5136
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 87/100     Loss: 1.7056
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 87/100     Loss: 1.2071
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 90/100     Loss: 1.3771
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 90/100     Loss: 1.2560
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 93/100     Loss: 1.2069
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 93/100     Loss: 1.2365
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 96/100     Loss: 1.1568
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 96/100     Loss: 1.1218
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 99/100     Loss: 1.7825
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 99/100     Loss: 1.0621
 </pre></div>
 </div>
 </div>
@@ -875,8 +901,8 @@ m_{ij} = {f} \cdot {i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After Convolution: 0.6113851070404053, After ReLU: 0.6113851070404053
-After Hidden Layer 1: 0.8096495270729065, After Hidden Layer 2: 0.33643490076065063
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After Convolution: 0.6482335925102234, After ReLU: 0.6482335925102234
+After Hidden Layer 1: 0.8217945098876953, After Hidden Layer 2: 0.5319811701774597
 </pre></div>
 </div>
 </div>
@@ -890,7 +916,7 @@ After Hidden Layer 1: 0.8096495270729065, After Hidden Layer 2: 0.33643490076065
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16e6bf300c1e962dfdfc1d58cd41c42e8083bd50e7d1465496cc1dce3d2f0265.png" src="../_images/16e6bf300c1e962dfdfc1d58cd41c42e8083bd50e7d1465496cc1dce3d2f0265.png" />
+<img alt="../_images/33c30356f7dab9b72ecb6eb98d7f4594d4f07c4ebcd9e17b9ceee8c7211dba6f.png" src="../_images/33c30356f7dab9b72ecb6eb98d7f4594d4f07c4ebcd9e17b9ceee8c7211dba6f.png" />
 </div>
 </div>
 </section>

@@ -1,3 +1,6 @@
+.bd-page-width {
+    max-width: none; /* No a max-width restriction */
+}
 
 /* ------------ header ------------ */
 
@@ -23,6 +26,9 @@
 
 .prev-next-footer.d-print-none {
     padding: 20px 35px 20px 35px !important;
+    width: 100%;
+    max-width: 880px;
+    margin: auto;
 }
 
 
@@ -30,13 +36,13 @@
 
 #pst-primary-sidebar,
 #pst-secondary-sidebar {
-    scrollbar-width: none; /* For Firefox */
-    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    scrollbar-width: none;      /* For Firefox */
+    -ms-overflow-style: none;   /* For Internet Explorer and Edge */
 }
 
 #pst-primary-sidebar::-webkit-scrollbar,
 #pst-secondary-sidebar::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Opera */
+    display: none;              /* For Chrome, Safari, and Opera */
 }
 
 
@@ -109,12 +115,13 @@
 /* --------------- article --------------- */
 
 .bd-article-container {
-    width: 100% !important;
     max-width: none !important;
 }
 
 .bd-article {
     padding: 24px 40px 0 40px !important;
+    max-width: 880px;
+    margin: auto;
 }
 
 h2 {
