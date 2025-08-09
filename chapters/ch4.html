@@ -16,34 +16,31 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7cf5026b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d33c19de" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -69,7 +66,6 @@
     <link rel="prev" title="3. Improving NNs" href="ch3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -85,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -94,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -101,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -118,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -149,17 +156,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Mastering Deep Learning - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Mastering Deep Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Mastering Deep Learning - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
@@ -293,16 +304,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -326,13 +345,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mnist-dataset">4.1. MNIST dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">4.2. Data Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">4.3. Train, Test, and Validation Splits</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten">4.4. Flatten</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nn-module-nn-sequential-and-nn-layers">4.5. nn.Module, nn.Sequential and nn.Layers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">4.6. Overfitting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">4.7. Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">4.1. Train, Test, and Validation Splits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-and-overfitting">4.2. Underfitting and Overfitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#early-stopping">4.3. Early Stopping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">4.4. Convolutional Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">4.5. Confusion Matrix</a></li>
 </ul>
             </nav>
         </div>
@@ -346,317 +363,449 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="image-recognition">
 <h1><span class="section-number">4. </span>Image Recognition<a class="headerlink" href="#image-recognition" title="Link to this heading">#</a></h1>
-<section id="mnist-dataset">
-<h2><span class="section-number">4.1. </span>MNIST dataset<a class="headerlink" href="#mnist-dataset" title="Link to this heading">#</a></h2>
-<p>        So far, we have only used the 60,000 training images of the <a class="reference external" href="https://huggingface.co/datasets/ylecun/mnist">MNIST dataset</a>. But, we have not talked about how this images have been imported and preprocessed to be used in our neural network.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the MNIST dataset</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;ylecun/mnist&quot;</span><span class="p">)</span>
-<span class="n">ds</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatasetDict({
-    train: Dataset({
-        features: [&#39;image&#39;, &#39;label&#39;],
-        num_rows: 60000
-    })
-    test: Dataset({
-        features: [&#39;image&#39;, &#39;label&#39;],
-        num_rows: 10000
-    })
-})
-</pre></div>
-</div>
-</div>
-</div>
-<p>Based on the dataset structure, we can access the images like this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_image</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
-<span class="n">first_image</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1aecaa0e99943d77fdcef47a591e7b7bec750f410d70173827b2ef2de23db56c.png" src="../_images/1aecaa0e99943d77fdcef47a591e7b7bec750f410d70173827b2ef2de23db56c.png" />
-</div>
-</div>
-<p>Please note that the images in the dataset are in PIL (Python Imaging Library) format.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">first_image</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PIL.PngImagePlugin.PngImageFile
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="data-preprocessing">
-<h2><span class="section-number">4.2. </span>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
-<p>Usually, the collected data is not immediately ready to be the input of a machine learning model. The steps taken to clean and prepare the data are known as <strong>data preprocessing</strong>. When working with PIL images in deep learning, the typical workflow involves converting them first to NumPy arrays and then, to normalized PyTorch tensors.</p>
-<p>Suppose we have the following 4x4 PIL image:</p>
-<figure class="align-default" id="image-example">
-<a class="reference internal image-reference" href="../_images/image-example.png"><img alt="../_images/image-example.png" src="../_images/image-example.png" style="width: 150px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">4x4 PIL image</span><a class="headerlink" href="#image-example" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>When we convert this image to a NumPy array, each pixel value ranges from 0 (black) to 255 (white), with intermediate values representing varying shades of gray.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">42</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">],</span>
-          <span class="p">[</span> <span class="mi">42</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">],</span>
-          <span class="p">[</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">213</span><span class="p">],</span>
-          <span class="p">[</span><span class="mi">127</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">255</span><span class="p">]])</span>
-</pre></div>
-</div>
-<p>Neural networks perform better when when we <strong>normalize</strong> the input values so that they fall within the range [0, 1]. To do this, we divide each pixel value by 255, so values range from 0 (black) to 1 (white).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.1647</span><span class="p">,</span> <span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.1647</span><span class="p">,</span> <span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.3333</span><span class="p">,</span> <span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">,</span> <span class="mf">0.8353</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.4980</span><span class="p">,</span> <span class="mf">0.6667</span><span class="p">,</span> <span class="mf">0.8353</span><span class="p">,</span> <span class="mf">1.0000</span><span class="p">]])</span>
-</pre></div>
-</div>
-<p>We will create the function <code class="docutils literal notranslate"><span class="pre">preprocess_data</span></code> to apply these transformations to all the images in the train and test datasets.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert PIL image to normalized PyToch tensor</span>
-<span class="k">def</span> <span class="nf">image_to_tensor</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">))</span> <span class="o">/</span> <span class="mf">255.0</span>
-
-
-<span class="k">def</span> <span class="nf">preprocess_data</span><span class="p">(</span><span class="n">split</span><span class="p">):</span>
-    
-    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list to store image tensors</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list to store labels</span>
-
-    <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">split</span><span class="p">:</span>
-        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_to_tensor</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]))</span>
-        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">])</span>
-    
-    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-
-<span class="c1"># preprocess the train and test datasets</span>
-<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])</span>
-<span class="n">test_x</span><span class="p">,</span>  <span class="n">test_y</span>  <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="train-test-and-validation-splits">
-<h2><span class="section-number">4.3. </span>Train, Test, and Validation Splits<a class="headerlink" href="#train-test-and-validation-splits" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Train, Test, and Validation Splits<a class="headerlink" href="#train-test-and-validation-splits" title="Link to this heading">#</a></h2>
 <p>When working with neural networks, it is common practice to divide the dataset into three splits:</p>
 <ul class="simple">
 <li><p>The <strong>train split</strong> (80% of the dataset) is used to optimize the model parameters during training.</p></li>
-<li><p>The <strong>validation split</strong> (10% of the dataset) is used to help us adjust the hyperparameters of the model, such as the size of the hidden layer, embedding size, and regularization strength.</p></li>
+<li><p>The <strong>validation split</strong> (10% of the dataset) is used to help us adjust the hyperparameters of the model.</p></li>
 <li><p>The <strong>test split</strong> (10% of the dataset) is used to evaluate the final model’s performance.</p></li>
 </ul>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The test split should be used only after the model is fully optimized, as its goal is to evaluate the final model’s performance. Using the test split to help us adjust the hyperparameters of the model would result in overfitting.</p>
+<br>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Metric</strong></p></th>
+<th class="head"><p><strong>Typical Use</strong></p></th>
+<th class="head"><p><strong>Notes</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Train Loss</p></td>
+<td><p>Monitor how well the model is learning</p></td>
+<td><p>Should decrease over epochs. If it doesn’t, possible issues include a too low/high learning rate, underfitting (model too simple), or noisy data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Val Loss</p></td>
+<td><p>Monitor how well the model generalizes</p></td>
+<td><p>Should also decrease. If Train Loss ↓ but Val Loss ↑, it indicates overfitting (model too complex or too much training). Commonly used in early stopping.</p></td>
+</tr>
+<tr class="row-even"><td><p>Val Accuracy</p></td>
+<td><p>Measures model performance on unseen data</p></td>
+<td><p>Often more interpretable than loss, especially for classification tasks.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Test Loss/Accuracy</p></td>
+<td><p>Report final model performance</p></td>
+<td><p>Use only after the model is fully optimized. Using the test split to help us adjust the hyperparameters of the model would result in overfitting.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split test data into validation and test data</span>
-<span class="n">val_x</span> <span class="o">=</span> <span class="n">test_x</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span>
-<span class="n">val_y</span> <span class="o">=</span> <span class="n">test_y</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span>
-<span class="n">test_x</span> <span class="o">=</span> <span class="n">test_x</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
-<span class="n">test_y</span> <span class="o">=</span> <span class="n">test_y</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Splits         Images              Labels
---------------------------------------------------
-Train          (60000, 28, 28)     [60000]
-Validation     (5000, 28, 28)      [5000]
-Test           (5000, 28, 28)      [5000]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_x</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
-<span class="n">val_x</span> <span class="o">=</span> <span class="n">val_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
-<span class="n">test_x</span> <span class="o">=</span> <span class="n">test_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="flatten">
-<h2><span class="section-number">4.4. </span>Flatten<a class="headerlink" href="#flatten" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Splits&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="s1">&#39;Images&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="s1">&#39;Labels&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Train&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Validation&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">val_x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">val_y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Test&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">test_x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">test_y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Splits         Images              Labels
---------------------------------------------------
-Train          (60000, 784)        [60000]
-Validation     (5000, 784)         [5000]
-Test           (5000, 784)         [5000]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="nn-module-nn-sequential-and-nn-layers">
-<h2><span class="section-number">4.5. </span>nn.Module, nn.Sequential and nn.Layers<a class="headerlink" href="#nn-module-nn-sequential-and-nn-layers" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">Module</span><span class="p">,</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Linear</span><span class="p">,</span> <span class="n">BatchNorm1d</span><span class="p">,</span> <span class="n">Tanh</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the dataset</span>
+<span class="n">train_ds</span> <span class="o">=</span> <span class="n">MNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;../data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ToTensor</span><span class="p">())</span>
+<span class="n">test_ds</span>  <span class="o">=</span> <span class="n">MNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;../data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ToTensor</span><span class="p">())</span>
 
-<span class="k">class</span> <span class="nc">PrevNN</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+<span class="c1"># Split full training set into train and validation</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">train_ds</span><span class="p">,</span> <span class="n">val_ds</span> <span class="o">=</span> <span class="n">random_split</span><span class="p">(</span><span class="n">train_ds</span><span class="p">,</span> <span class="p">[</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">],</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_hidden</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span>
-            <span class="n">Linear</span><span class="p">(</span>     <span class="mi">784</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
-            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
-            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
-            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">),</span> <span class="n">Tanh</span><span class="p">(),</span>
-            <span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span>       <span class="mi">10</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-
-
-<span class="k">def</span> <span class="nf">get_batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
-    <span class="n">ix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60000</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,))</span>
-    <span class="k">return</span> <span class="n">train_x</span><span class="p">[</span><span class="n">ix</span><span class="p">],</span> <span class="n">train_y</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
-
-
-<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">calculate_loss</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
-
-    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="c1"># put the model in evaluation mode</span>
-
-    <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">train_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">))</span>
-    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
-
-    <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">val_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">))</span>
-    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">val_y</span><span class="p">)</span>
-
-    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span> <span class="c1"># put the model back in train mode</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">     Train Loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">     Val Loss: </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hyperparameters</span>
-<span class="n">steps</span> <span class="o">=</span> <span class="mi">200</span>        <span class="c1"># train iterations</span>
-<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>           <span class="c1"># learning rate</span>
+<span class="c1"># DataLoaders</span>
 <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="n">eval_interval</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># every how many iterations calculate the loss</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="n">val_loader</span>   <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">val_ds</span><span class="p">,</span>   <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="n">test_loader</span>  <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_ds</span><span class="p">,</span>  <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_log</span><span class="p">(</span><span class="n">log</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print formatted training log table.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        log (str): Formatted log string with one line per epoch.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="s1">&#39;Epoch&#39;</span><span class="si">:</span><span class="s2">^5</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;Train Loss&#39;</span><span class="si">:</span><span class="s2">^10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;Val Loss&#39;</span><span class="si">:</span><span class="s2">^8</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;Val Accuracy&#39;</span><span class="si">:</span><span class="s2">^12</span><span class="si">}</span><span class="s2"> |&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;|</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">7</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">12</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">10</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">14</span><span class="si">}</span><span class="s2">|&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot training and validation loss, and validation accuracy over epochs.</span>
 
-<span class="n">loss_graph</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># initialize the model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">PrevNN</span><span class="p">(</span><span class="n">n_hidden</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="c1"># create a PyTorch optimizer</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
-
-    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">eval_interval</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">step</span> <span class="o">==</span> <span class="n">steps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">calculate_loss</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        metrics (list): List of tuples of the form (train_loss, val_loss, val_accuracy).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">train_losses</span><span class="p">,</span> <span class="n">val_losses</span><span class="p">,</span> <span class="n">val_accuracies</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">metrics</span><span class="p">)</span>
+    <span class="n">epochs_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     
-    <span class="c1"># sample a batch of the dataa</span>
-    <span class="n">Xb</span><span class="p">,</span> <span class="n">Yb</span> <span class="o">=</span> <span class="n">get_batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
-    <span class="c1"># forward pass</span>
-    <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Xb</span><span class="p">)</span>
+    <span class="c1"># Plot Loss</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">,</span> <span class="n">train_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Train Loss&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">,</span> <span class="n">val_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Val Loss&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
 
-    <span class="c1"># calculate loss</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">Yb</span><span class="p">)</span>
+    <span class="c1"># Plot Accuracy</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">,</span> <span class="p">[</span><span class="n">acc</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">val_accuracies</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Val Accuracy&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy (%)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
 
-    <span class="c1"># backward pass</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">(</span><span class="n">set_to_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyperparameters</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">9</span>          <span class="c1"># Number of times the dataset is fully seen</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>     <span class="c1"># Number of examples per batch</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>            <span class="c1"># Learning rate</span>
 
-    <span class="c1"># update parameters</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="c1"># Initialize model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="c1"># Train model</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">running_train_loss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">Xb</span><span class="p">,</span> <span class="n">Yb</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Xb</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">Yb</span><span class="p">)</span>
+        <span class="n">running_train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">running_train_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
+    <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+    
+    <span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">))</span>
+    <span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">^5</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">^10.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">^8.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="si">:</span><span class="s2">^12</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+
+<span class="c1"># Evaluate model</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test Loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">    Test Accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+
+<span class="n">print_log</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:   0/200     Train Loss: 2.3025     Val Loss: 2.3029
-Step:  10/200     Train Loss: 1.8548     Val Loss: 1.8793
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| Epoch | Train Loss | Val Loss | Val Accuracy |
+|-------|------------|----------|--------------|
+|   1   |   0.3377   |  0.1677  |    94.85%    |
+|   2   |   0.1750   |  0.1422  |    95.81%    |
+|   3   |   0.1316   |  0.1113  |    96.58%    |
+|   4   |   0.1073   |  0.1051  |    96.75%    |
+|   5   |   0.0908   |  0.1061  |    96.81%    |
+|   6   |   0.0782   |  0.0878  |    97.48%    |
+|   7   |   0.0667   |  0.0965  |    97.08%    |
+|   8   |   0.0621   |  0.0813  |    97.54%    |
+|   9   |   0.0531   |  0.0834  |    97.54%    |
+
+Test Loss: 0.0835    Test Accuracy: 97.50%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  20/200     Train Loss: 1.1340     Val Loss: 1.1651
-Step:  30/200     Train Loss: 0.8090     Val Loss: 0.8728
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  40/200     Train Loss: 0.6876     Val Loss: 0.7610
-Step:  50/200     Train Loss: 0.5811     Val Loss: 0.6504
-</pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  60/200     Train Loss: 0.5408     Val Loss: 0.6163
-Step:  70/200     Train Loss: 0.4758     Val Loss: 0.5306
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  80/200     Train Loss: 0.4638     Val Loss: 0.5336
-Step:  90/200     Train Loss: 0.4430     Val Loss: 0.5222
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 100/200     Train Loss: 0.4217     Val Loss: 0.5046
-Step: 110/200     Train Loss: 0.4239     Val Loss: 0.5041
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 120/200     Train Loss: 0.4530     Val Loss: 0.5237
-Step: 130/200     Train Loss: 0.4014     Val Loss: 0.4617
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 140/200     Train Loss: 0.3986     Val Loss: 0.4731
-Step: 150/200     Train Loss: 0.4193     Val Loss: 0.4907
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 160/200     Train Loss: 0.3899     Val Loss: 0.4618
-Step: 170/200     Train Loss: 0.3668     Val Loss: 0.4357
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 180/200     Train Loss: 0.3476     Val Loss: 0.4083
-Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 199/200     Train Loss: 0.3376     Val Loss: 0.3947
-</pre></div>
-</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eeb972889747fc5b46e4fdf3e55e84fa3704396bfa54fa01313887fc47019207.png" src="../_images/eeb972889747fc5b46e4fdf3e55e84fa3704396bfa54fa01313887fc47019207.png" />
 </div>
 </div>
 </section>
-<section id="overfitting">
-<h2><span class="section-number">4.6. </span>Overfitting<a class="headerlink" href="#overfitting" title="Link to this heading">#</a></h2>
+<section id="underfitting-and-overfitting">
+<h2><span class="section-number">4.2. </span>Underfitting and Overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Link to this heading">#</a></h2>
+<p>Underfitting happens when a model is too simple or not trained enough to capture the underlying patterns in the data. It performs poorly both on training data and on validation/test data.</p>
+<p>Overfitting happens when a model learns the training data too well, including the noise or random fluctuations, instead of general patterns. It performs great on training data but poorly on new unseen data (validation/test data).</p>
+<p>This typically occurs when:</p>
+<ul class="simple">
+<li><p>The model is too complex: For example, too many layers or too many parameters.</p></li>
+<li><p>Training for too long: If you train a complex model for too many epochs, it starts fitting not just the true signal but also noise in the training set.</p></li>
+</ul>
+</section>
+<section id="early-stopping">
+<h2><span class="section-number">4.3. </span>Early Stopping<a class="headerlink" href="#early-stopping" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EarlyStopping</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patience</span> <span class="o">=</span> <span class="n">patience</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_val_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epochs_no_improve</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_model_state</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val_loss</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_val_loss</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">best_val_loss</span> <span class="o">=</span> <span class="n">val_loss</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">epochs_no_improve</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">best_model_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">epochs_no_improve</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">epochs_no_improve</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">patience</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Early stopping triggered at epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Best epoch was </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">patience</span><span class="si">}</span><span class="s2">, loaded those weights</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">log</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyperparameters</span>
+<span class="n">max_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">patience</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>     <span class="c1"># Number of examples per batch</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>            <span class="c1"># Learning rate</span>
+
+
+<span class="c1"># Intialize model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+<span class="n">early_stopper</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="n">patience</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="c1"># Train model</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_epochs</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">running_train_loss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">Xb</span><span class="p">,</span> <span class="n">Yb</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Xb</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">Yb</span><span class="p">)</span>
+        <span class="n">running_train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">running_train_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
+    <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+    
+    <span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">))</span>
+    <span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">^5</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">^10.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">^8.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="si">:</span><span class="s2">^12</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Early stopping</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">early_stopper</span><span class="p">(</span><span class="n">val_loss</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">early_stopper</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="c1"># Load best model weights before testing</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">early_stopper</span><span class="o">.</span><span class="n">best_model_state</span><span class="p">)</span>
+
+<span class="c1"># Evaluate model</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test Loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">    Test Accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+
+<span class="n">print_log</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| Epoch | Train Loss | Val Loss | Val Accuracy |
+|-------|------------|----------|--------------|
+|   1   |   0.3333   |  0.1822  |    94.80%    |
+|   2   |   0.1762   |  0.1416  |    95.76%    |
+|   3   |   0.1320   |  0.1078  |    96.77%    |
+|   4   |   0.1062   |  0.1028  |    96.84%    |
+|   5   |   0.0899   |  0.1183  |    96.20%    |
+|   6   |   0.0789   |  0.1024  |    96.96%    |
+|   7   |   0.0697   |  0.0937  |    97.23%    |
+|   8   |   0.0597   |  0.0956  |    97.18%    |
+|   9   |   0.0559   |  0.0927  |    97.18%    |
+|  10   |   0.0492   |  0.0921  |    97.26%    |
+|  11   |   0.0460   |  0.1029  |    96.89%    |
+|  12   |   0.0420   |  0.0885  |    97.43%    |
+|  13   |   0.0410   |  0.0934  |    97.14%    |
+|  14   |   0.0338   |  0.0832  |    97.47%    |
+|  15   |   0.0320   |  0.0857  |    97.60%    |
+|  16   |   0.0287   |  0.0813  |    97.71%    |
+|  17   |   0.0292   |  0.0795  |    97.69%    |
+|  18   |   0.0263   |  0.0818  |    97.85%    |
+|  19   |   0.0256   |  0.0854  |    97.69%    |
+|  20   |   0.0222   |  0.0813  |    97.80%    |
+
+Early stopping triggered at epoch 20
+Best epoch was 17, loaded those weights
+
+Test Loss: 0.0833    Test Accuracy: 97.86%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f11b307b97269f1f94ca8a2e8b86776c4de63ad1c5940fc894e4b8d79d7848b8.png" src="../_images/f11b307b97269f1f94ca8a2e8b86776c4de63ad1c5940fc894e4b8d79d7848b8.png" />
+</div>
+</div>
+</section>
+<section id="convolutional-neural-networks">
+<h2><span class="section-number">4.4. </span>Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CNNModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># Input: (B, 1, 28, 28)</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>                             <span class="c1"># -&gt; (B, 32, 14, 14)</span>
+
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>                             <span class="c1"># -&gt; (B, 64, 7, 7)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Output layer</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Flatten before Linear</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyperparameters</span>
+<span class="n">max_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">patience</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>     <span class="c1"># Number of examples per batch</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>            <span class="c1"># Learning rate</span>
+
+
+<span class="c1"># Intialize model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">CNNModel</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+<span class="n">early_stopper</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="n">patience</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="c1"># Train model</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_epochs</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">running_train_loss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">Xb</span><span class="p">,</span> <span class="n">Yb</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Xb</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">Yb</span><span class="p">)</span>
+        <span class="n">running_train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">running_train_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
+    <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+    
+    <span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">))</span>
+    <span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">^5</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">^10.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">^9.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">val_accuracy</span><span class="si">:</span><span class="s2">^12.4f</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Early stopping</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">early_stopper</span><span class="p">(</span><span class="n">val_loss</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">early_stopper</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="c1"># Load best model weights before testing</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">early_stopper</span><span class="o">.</span><span class="n">best_model_state</span><span class="p">)</span>
+
+<span class="c1"># Evaluate model</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Test Loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">    Test Accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">print_log</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| Epoch | Train Loss | Val Loss | Val Accuracy |
+|-------|------------|----------|--------------|
+|   1   |   0.5695   |  0.0957   |    0.9715    |
+|   2   |   0.1559   |  0.0664   |    0.9815    |
+|   3   |   0.1146   |  0.0497   |    0.9853    |
+|   4   |   0.0931   |  0.0435   |    0.9869    |
+|   5   |   0.0824   |  0.0425   |    0.9885    |
+|   6   |   0.0744   |  0.0350   |    0.9897    |
+|   7   |   0.0645   |  0.0497   |    0.9865    |
+|   8   |   0.0580   |  0.0382   |    0.9885    |
+|   9   |   0.0530   |  0.0341   |    0.9902    |
+|  10   |   0.0501   |  0.0352   |    0.9904    |
+|  11   |   0.0488   |  0.0347   |    0.9896    |
+|  12   |   0.0393   |  0.0436   |    0.9896    |
+
+Early stopping triggered at epoch 12
+Best epoch was 9, loaded those weights
+Test Loss: 0.0319    Test Accuracy: 0.9915
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f995398ee3db40e549d997adb843b4940dd865c8835a5647227c7df500bb260b.png" src="../_images/f995398ee3db40e549d997adb843b4940dd865c8835a5647227c7df500bb260b.png" />
+</div>
+</div>
 </section>
 <section id="confusion-matrix">
-<h2><span class="section-number">4.7. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.5. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logits</span><span class="o">.</span><span class="n">shape</span>
@@ -664,7 +813,7 @@ Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([32, 10])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([16, 10])
 </pre></div>
 </div>
 </div>
@@ -676,71 +825,22 @@ Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 1.9882e+00, -9.4943e-01, -3.8419e+00, -1.2989e+00,  1.5122e+00,
-         -1.1864e+00, -1.9441e-01,  2.8263e+00, -1.6137e+00,  3.1481e+00],
-        [ 1.1921e+00, -1.5169e+00,  1.0737e+00,  5.2271e+00, -2.7173e+00,
-          1.7100e+00, -1.7092e+00, -1.2392e+00,  4.8283e-01, -2.2560e+00],
-        [ 5.3646e-01, -4.8777e-01, -1.9512e-01, -1.1317e+00,  2.9474e+00,
-          1.6112e+00,  1.6530e+00, -1.8989e+00, -1.3221e+00, -8.8320e-01],
-        [-3.7312e-01,  4.3645e-01, -2.1208e+00, -9.2221e-01,  4.9167e+00,
-         -2.1482e+00,  6.6714e-01,  2.3431e-01, -1.9741e+00,  1.8540e+00],
-        [ 2.0837e+00, -9.6585e-01, -2.8289e+00, -1.2908e+00,  1.0533e+00,
-          4.3892e+00, -6.7079e-01, -1.3808e+00, -2.2676e-01,  6.7246e-01],
-        [-2.0146e-01, -5.7268e-02, -1.6256e+00, -4.9399e+00,  4.5870e+00,
-         -1.3296e-01,  1.1907e+00,  5.6190e-01, -6.2666e-01,  1.5079e+00],
-        [ 1.8141e+00, -9.3311e-01, -3.2291e+00,  4.2658e-01, -1.4474e-01,
-          4.2558e+00, -9.7067e-02, -2.5879e+00,  1.6741e+00, -2.1868e-01],
-        [ 8.8783e-01, -1.1872e+00,  4.9470e-01,  2.0971e-01, -2.2021e+00,
-         -1.4110e+00, -1.8509e+00,  5.3344e+00, -1.7560e+00, -1.5493e-01],
-        [-2.8450e+00, -1.7980e-01, -1.9195e+00, -1.3788e+00,  2.0832e-01,
-          1.1231e+00, -1.3783e+00,  2.5755e-01,  2.5883e+00,  4.0577e+00],
-        [-2.2468e+00,  4.4798e+00,  1.1074e+00, -5.0345e-01, -7.4793e-01,
-         -4.5904e-01, -1.3878e+00,  3.9644e-01, -5.6527e-01, -1.6069e+00],
-        [-2.4611e+00,  4.4314e+00,  1.3791e+00, -5.4446e-01, -2.1747e+00,
-          6.9312e-01,  1.0058e+00, -1.6492e+00,  4.1500e-01, -1.9253e+00],
-        [ 1.7685e+00, -9.8693e-01,  1.1658e+00,  9.5148e-01, -4.1232e+00,
-          1.4455e+00,  8.4940e-01, -2.2033e+00,  2.8252e+00, -8.8771e-01],
-        [-1.1223e+00, -1.6636e+00,  2.7809e+00,  3.0760e-01, -2.3656e+00,
-          1.9951e-01, -1.0769e+00, -4.9333e-01,  3.9822e+00, -5.9205e-01],
-        [ 6.0833e+00, -1.3399e+00, -4.1179e-01, -1.0297e-01,  2.4020e-01,
-          6.3703e-01, -1.4114e+00,  1.6938e-01, -2.5645e+00, -5.6934e-01],
-        [-4.6543e+00, -5.2461e-01, -1.1036e+00,  3.4026e-02,  3.5246e+00,
-          7.5376e-01, -4.7516e-02, -4.2231e-01,  1.0507e+00,  1.2969e+00],
-        [ 9.9151e-01, -1.0503e+00,  1.8653e-01, -1.4934e+00,  1.8964e+00,
-          5.2192e-01,  3.7824e+00, -2.5559e-01, -2.4134e+00, -1.9460e+00],
-        [-1.9583e+00,  4.3331e+00,  1.5144e+00,  3.9582e-01, -2.9746e+00,
-          1.4123e-01,  4.1084e-01, -8.5242e-01, -6.5198e-01, -1.5737e+00],
-        [ 2.3225e+00, -4.6264e-01, -1.2939e+00, -2.2431e+00, -3.8230e-01,
-         -1.8366e+00, -9.8516e-01,  4.7917e+00, -7.7113e-01,  5.6142e-02],
-        [-9.4309e-01, -4.0806e-01, -2.6262e+00, -1.4213e+00,  3.1936e-01,
-         -7.4968e-01, -1.4049e+00,  2.0093e+00,  4.1258e-01,  5.7630e+00],
-        [-2.4000e+00, -1.3915e+00,  8.4780e-01,  5.8726e+00, -4.3977e-01,
-         -4.8357e-01, -1.2945e+00, -4.0507e-01,  2.6933e-01, -5.1288e-01],
-        [-2.4879e+00, -1.5906e+00, -3.4926e-02, -1.6296e+00,  4.9407e+00,
-         -5.3139e-02,  1.3264e-01, -6.3258e-01,  9.6925e-01,  8.8023e-01],
-        [-9.6063e-01,  3.9910e+00,  2.0408e+00, -1.4875e-01, -3.9310e+00,
-          3.0614e-01, -1.2578e-01, -7.7372e-01,  4.3715e-01, -2.0437e+00],
-        [-4.8100e-01,  5.2112e-01,  6.8691e-01, -3.1136e+00,  8.5895e-01,
-         -1.3533e+00,  6.1434e+00, -1.4944e+00, -6.2019e-03, -6.7228e-01],
-        [ 1.5791e-01, -6.1082e-02,  3.5181e+00,  2.4544e+00, -1.4989e+00,
-          3.7097e-01,  5.0665e-01, -1.2226e+00, -2.2836e-01, -4.7899e+00],
-        [-1.6318e+00,  2.9904e+00,  1.4896e+00,  1.4261e+00, -3.1201e+00,
-         -7.6580e-01, -2.0512e+00,  1.3998e+00, -2.6515e-01, -1.2144e+00],
-        [ 3.7234e-02, -6.6306e-02,  2.4874e-01,  2.8114e+00, -1.6259e+00,
-         -4.1395e-02, -3.2271e+00, -1.5330e+00,  4.1122e+00, -3.5793e-02],
-        [-7.7184e-01, -1.3761e+00, -4.6135e-01,  6.4448e+00, -1.6890e+00,
-          6.9805e-01, -2.1250e+00,  1.9349e-01, -4.1757e-01, -6.0809e-01],
-        [ 7.2668e+00, -1.6518e+00, -7.5354e-01, -3.2789e-01, -8.0195e-01,
-          1.0826e+00, -5.4170e-01, -2.4315e-01, -1.8420e+00, -1.1360e+00],
-        [-2.6253e+00, -4.4264e-01, -2.4843e+00, -1.4015e-01,  8.9754e-01,
-         -3.5707e-01, -1.6755e+00,  1.4268e+00,  9.4652e-01,  5.1017e+00],
-        [ 2.5936e-02,  3.7437e-01, -2.1889e-01, -2.6658e+00,  6.9921e-01,
-         -1.3878e+00,  5.9728e+00, -1.1598e+00, -3.3416e-01,  3.5584e-02],
-        [-2.3348e-01, -3.6203e-01,  5.0616e+00,  6.7772e-01, -2.3542e-01,
-         -8.4518e-01,  1.9723e+00, -1.4870e+00, -8.0365e-01, -3.6767e+00],
-        [-7.9684e-01, -1.1692e+00,  1.9618e+00, -1.2542e+00,  8.3013e-01,
-         -3.2775e+00, -6.0593e-01,  1.0798e+00,  6.1948e-01,  3.5763e+00]],
-       grad_fn=&lt;MmBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[  2.99,   5.19,   1.10,  -2.77,   4.54,   1.52,  14.92, -10.36,   0.54,  -9.40],
+        [ -1.71, -14.58, -23.73,  13.06, -13.71,  54.52,   6.84, -20.47,  -4.55,   3.39],
+        [ 24.11, -16.49,   1.37,  -1.91,  -5.03,  -5.79,  -3.22,   6.40,  -5.46,   3.58],
+        [ 29.00,  -9.72,   1.11,  -4.10,   0.94, -11.61,   0.88,   2.17,  -6.74,   5.05],
+        [ 51.01, -28.28,  24.66,  -7.37, -25.75, -16.11, -20.28,  15.99,  -4.33,  -0.66],
+        [ -5.26,  -9.09,  -8.67,   8.59,  -8.44,  18.71,   2.23,  -2.32,   2.32,   5.35],
+        [ -5.09,  -6.49,   7.76,  25.62,  -8.69,   1.40,  -8.47,  -3.76,   2.42,  -2.93],
+        [ -1.06,  -5.51,  -9.39,   7.23,  -7.84,  19.92,   3.74,  -6.02,   3.41,   4.23],
+        [ -6.40, -19.72,   2.80,  -8.46,  47.87, -13.62,  -4.40,  -4.40,  -0.61,  13.14],
+        [ -9.86, -11.91, -13.74,   4.94,   3.98,  -8.55, -23.54,  11.32,   6.69,  28.71],
+        [ -1.82,  -8.28,  -6.43,   6.72,  -7.25,  11.84,   0.47,  -4.49,   5.19,   4.78],
+        [  5.09,   2.25,   3.84,  -9.23,   1.99,   8.85,  26.25, -20.09,   1.74, -13.43],
+        [ 25.46, -19.68,  -3.95,   2.75,  -7.03,   1.76,  -6.04,   0.51,   0.15,   1.84],
+        [ 40.59, -17.50,  -0.46, -20.46, -10.10,  -2.25,   4.09,   5.38,  -5.13,   5.42],
+        [ -6.74,  17.81,   3.87,  -3.78,   3.33,  -4.03,  -4.19,  10.00,  -6.77,  -3.12],
+        [ -1.11,   1.42,  22.94,   5.90,  -5.48, -15.86, -12.95,   3.39,   7.13,  -7.47]], grad_fn=&lt;AddmmBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -753,8 +853,7 @@ Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([9, 3, 4, 4, 5, 4, 5, 7, 9, 1, 1, 8, 8, 0, 4, 6, 1, 7, 9, 3, 4, 1, 6, 2,
-        1, 8, 3, 0, 9, 6, 2, 9])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([6, 5, 0, 0, 0, 5, 3, 5, 4, 9, 5, 6, 0, 0, 1, 2])
 </pre></div>
 </div>
 </div>
@@ -766,8 +865,7 @@ Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([7, 3, 5, 4, 5, 4, 5, 7, 9, 1, 1, 8, 8, 0, 4, 6, 1, 7, 9, 3, 4, 1, 6, 5,
-        1, 8, 3, 0, 9, 6, 2, 9])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([6, 5, 0, 0, 0, 5, 3, 5, 4, 9, 5, 6, 0, 0, 1, 2])
 </pre></div>
 </div>
 </div>
@@ -784,16 +882,16 @@ Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 5, 0, 0, 0, 0, 0, 0, 0, 0],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 4, 0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 1, 2, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 2, 0, 1],
-        [0, 0, 0, 0, 0, 0, 0, 0, 3, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 4]], dtype=torch.int32)
+        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 4, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]], dtype=torch.int32)
 </pre></div>
 </div>
 </div>
@@ -856,8 +954,7 @@ Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -866,13 +963,11 @@ Step: 190/200     Train Loss: 0.3518     Val Loss: 0.4147
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mnist-dataset">4.1. MNIST dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">4.2. Data Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">4.3. Train, Test, and Validation Splits</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten">4.4. Flatten</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nn-module-nn-sequential-and-nn-layers">4.5. nn.Module, nn.Sequential and nn.Layers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">4.6. Overfitting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">4.7. Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-and-validation-splits">4.1. Train, Test, and Validation Splits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-and-overfitting">4.2. Underfitting and Overfitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#early-stopping">4.3. Early Stopping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">4.4. Convolutional Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">4.5. Confusion Matrix</a></li>
 </ul>
   </nav></div>
 
@@ -921,8 +1016,8 @@ By Daniel Simon
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -16,34 +16,31 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7cf5026b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d33c19de" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -71,7 +68,6 @@
     <link rel="prev" title="1. Deep Learing" href="ch1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Mastering Deep Learning - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Mastering Deep Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Mastering Deep Learning - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
@@ -295,16 +306,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -332,14 +351,16 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neurons">2.2. Neurons</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-nns-learn">2.3. How NNs Learn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digits-recognizer">2.4. Digits Recognizer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">2.5. MLP</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">2.6. Forward Pass</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tanh">2.7. Tanh</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">2.8. Softmax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-loss">2.9. Calculate Loss</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-pass">2.10. Backward Pass</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">2.11. Update Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">2.12. Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">2.5. Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">2.6. MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-initialization">2.7. Random Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">2.8. Forward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tanh">2.9. Tanh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">2.10. Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-loss">2.11. Calculate Loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-pass">2.12. Backward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">2.13. Update Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">2.14. Training</a></li>
 </ul>
             </nav>
         </div>
@@ -371,7 +392,7 @@
 </section>
 <section id="neurons">
 <span id="id2"></span><h2><span class="section-number">2.2. </span>Neurons<a class="headerlink" href="#neurons" title="Link to this heading">#</a></h2>
-<p>        A <strong>neuron</strong> is a unit that takes in multiple inputs and processes them to produce a single output. As shown above in <a class="reference internal" href="#neural-network"><span class="std std-ref"><em>Fig. 1.2</em></span></a>, each neuron in the hidden and output layers connects to all the neurons in the previous layer. These connections have associated values, known as <strong>weights</strong>, which are adjusted by the model. The weights represent the strength of connection between the neurons. A greater weight indicates a stronger connection.</p>
+<p>        A <strong>neuron</strong> is a unit that takes in multiple inputs and processes them to produce a single output. As shown above in <a class="reference internal" href="#neural-network"><span class="std std-ref"><em>Fig. 2.1</em></span></a>, each neuron in the hidden and output layers connects to all the neurons in the previous layer. These connections have associated values, known as <strong>weights</strong>, which are adjusted by the model. The weights represent the strength of connection between the neurons. A greater weight indicates a stronger connection.</p>
 <figure class="align-default" id="neuron">
 <a class="reference internal image-reference" href="../_images/neuron.png"><img alt="../_images/neuron.png" src="../_images/neuron.png" style="width: 220px;" /></a>
 <figcaption>
@@ -390,7 +411,7 @@ h = \sigma\left(x_1w_1 + x_2w_2 + \dots + x_dw_d + b\right)
 \]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(d\)</span> is the dimensionality of the input vector.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span> is the number of inputs to the neuron.</p></li>
 </ul>
 </div>
 <div class="admonition important">
@@ -400,7 +421,7 @@ h = \sigma\left(x_1w_1 + x_2w_2 + \dots + x_dw_d + b\right)
 </section>
 <section id="how-nns-learn">
 <h2><span class="section-number">2.3. </span>How NNs Learn<a class="headerlink" href="#how-nns-learn" title="Link to this heading">#</a></h2>
-<p>Neural networks use supervised learning to adjust their parameters (weights and biases) to minimize the loss function. This process involves repeating these four steps during training:</p>
+<p>Neural networks learn using training data to adjust their parameters (weights and biases) to minimize the loss function. This process involves repeating these four steps during training:</p>
 <ol class="arabic simple">
 <li><p><strong>Forward Pass:</strong> Process input data though network and generate predictions.</p></li>
 <li><p><strong>Calculate Loss:</strong> Calculate the error of the predictions.</p></li>
@@ -417,79 +438,256 @@ h = \sigma\left(x_1w_1 + x_2w_2 + \dots + x_dw_d + b\right)
 <p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Digit Recognizer</span><a class="headerlink" href="#digit-recognizer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="cell tag_remove-input docutils container">
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import libraries</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">MNIST</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToTensor</span>
 
-<span class="c1"># set print options for PyTorch tensors</span>
-<span class="n">torch</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">sci_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Set print options for PyTorch tensors</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;full&quot;</span><span class="p">,</span> <span class="n">sci_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1"># load the MNIST dataset</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;ylecun/mnist&quot;</span><span class="p">)</span>
-
-<span class="c1"># preprocess the data (we will see this function in Chapter 4)</span>
-<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels: </span><span class="si">{</span><span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Load the MNIST dataset</span>
+<span class="n">train_ds</span> <span class="o">=</span> <span class="n">MNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;../data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can access the images and labels of the PyTorch Dataset object indexing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_ds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: torch.Size([60000, 28, 28])
-Labels: torch.Size([60000])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;PIL.Image.Image image mode=L size=28x28&gt;, 5)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Each image is currently stored as a matrix of shape (28, 28). To be able to process these images, we need to flatten them into vectors of shape (784).</p>
+<p>Let’s take a look at the first 2 images:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_ds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e9511decfe38aa761fa6950e77f111800b7490b715ea65c0df039ea7dc07137c.png" src="../_images/e9511decfe38aa761fa6950e77f111800b7490b715ea65c0df039ea7dc07137c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_ds</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9c9da307dc15402273ca36c34f7c14afff117c0f1073ce2d5069b4cf0b8b7c2c.png" src="../_images/9c9da307dc15402273ca36c34f7c14afff117c0f1073ce2d5069b4cf0b8b7c2c.png" />
+</div>
+</div>
+</section>
+<section id="data-preprocessing">
+<h2><span class="section-number">2.5. </span>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
+<p>Please note that the images in the dataset are in PIL (Python Imaging Library) format. Typically, raw data like this is not immediately ready to be used as input for a machine learning model. The steps required to clean and prepare the data are collectively known as <strong>data preprocessing</strong>.</p>
+<p>When working with PIL images in deep learning, the standard workflow involves converting the image to 8-bit format, and then transforming it into a normalized PyTorch tensor.</p>
+<p>Suppose we have the following 4x4 grayscale PIL image:</p>
+<figure class="align-default" id="image-example">
+<a class="reference internal image-reference" href="../_images/image-example.png"><img alt="../_images/image-example.png" src="../_images/image-example.png" style="width: 180px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">4x4 grayscale PIL image</span><a class="headerlink" href="#image-example" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>When represented in 8-bit format, each pixel is stored as a single byte and takes on a value between 0 (black) and 255 (white):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">42</span><span class="p">,</span>   <span class="mi">85</span><span class="p">,</span>  <span class="mi">127</span><span class="p">],</span>
+        <span class="p">[</span>  <span class="mi">42</span><span class="p">,</span>   <span class="mi">85</span><span class="p">,</span>  <span class="mi">127</span><span class="p">,</span>  <span class="mi">170</span><span class="p">],</span>
+        <span class="p">[</span>  <span class="mi">85</span><span class="p">,</span>  <span class="mi">127</span><span class="p">,</span>  <span class="mi">170</span><span class="p">,</span>  <span class="mi">213</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">127</span><span class="p">,</span>  <span class="mi">170</span><span class="p">,</span>  <span class="mi">213</span><span class="p">,</span>  <span class="mi">255</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>Neural networks generally perform better when their inputs are normalized. A common normalization technique for image data is to rescale pixel values to the range [0, 1] by dividing each value by 255:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">]])</span>
+</pre></div>
+</div>
 <div class="dropdown admonition">
 <p class="admonition-title">Help</p>
-<p><code class="docutils literal notranslate"><span class="pre">tensor.view()</span></code> efficiently reshapes the shape of a tensor.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ToTensor()</span></code> eficiently converts a PIL image to a normalized PyTorch tensor.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># flatten images</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the transformation</span>
+<span class="n">to_tensor</span> <span class="o">=</span> <span class="n">ToTensor</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">train_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">train_y</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">train_ds</span><span class="p">:</span>
+    <span class="n">train_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_tensor</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>  <span class="c1"># Apply the transformation to each image</span>
+    <span class="n">train_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="c1"># Conver the lists to PyTorch tensors</span>
+<span class="n">train_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">train_x</span><span class="p">)</span>
+<span class="n">train_y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">train_y</span><span class="p">)</span>
+
+<span class="c1"># Print the shapes of the resulting tensors</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train Images: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train Labels: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: torch.Size([60000, 784])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train Images: [60000, 1, 28, 28]
+Train Labels: [60000]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that our training images are stored as a 4D tensor of the form [N, C, H, W].</p>
+<p>The dimensions represent:</p>
+<ul class="simple">
+<li><p>N – Number of images (60,000 examples in the training set).</p></li>
+<li><p>C – Number of channels (1 for grayscale images; 3 for RGB/color images).</p></li>
+<li><p>H – Image height (28 pixels).</p></li>
+<li><p>W – Image width (28 pixels).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print first 2 images</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_x</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[[0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.01, 0.07, 0.07, 0.07, 0.49, 0.53, 0.69, 0.10, 0.65, 1.00, 0.97, 0.50, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.12, 0.14, 0.37, 0.60, 0.67, 0.99, 0.99, 0.99, 0.99, 0.99, 0.88, 0.67, 0.99, 0.95, 0.76, 0.25, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.93, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.98, 0.36, 0.32, 0.32, 0.22, 0.15, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.07, 0.86, 0.99, 0.99, 0.99, 0.99, 0.99, 0.78, 0.71, 0.97, 0.95, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.31, 0.61, 0.42, 0.99, 0.99, 0.80, 0.04, 0.00, 0.17, 0.60, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.05, 0.00, 0.60, 0.99, 0.35, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.55, 0.99, 0.75, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.04, 0.75, 0.99, 0.27, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.14, 0.95, 0.88, 0.63, 0.42, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.32, 0.94, 0.99, 0.99, 0.47, 0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.18, 0.73, 0.99, 0.99, 0.59, 0.11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.06, 0.36, 0.99, 0.99, 0.73, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.98, 0.99, 0.98, 0.25, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.18, 0.51, 0.72, 0.99, 0.99, 0.81, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.15, 0.58, 0.90, 0.99, 0.99, 0.99, 0.98, 0.71, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.09, 0.45, 0.87, 0.99, 0.99, 0.99, 0.99, 0.79, 0.31, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.09, 0.26, 0.84, 0.99, 0.99, 0.99, 0.99, 0.78, 0.32, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.07, 0.67, 0.86, 0.99, 0.99, 0.99, 0.99, 0.76, 0.31, 0.04, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.22, 0.67, 0.89, 0.99, 0.99, 0.99, 0.99, 0.96, 0.52, 0.04, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.53, 0.99, 0.99, 0.99, 0.83, 0.53, 0.52, 0.06, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]]],
+
+
+        [[[0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.20, 0.62, 0.99, 0.62, 0.20, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.93, 0.99, 0.99, 0.99, 0.93, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.21, 0.89, 0.99, 0.99, 0.94, 0.91, 0.99, 0.22, 0.02, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.04, 0.24, 0.88, 0.99, 0.99, 0.99, 0.79, 0.33, 0.99, 0.99, 0.48, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.64, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.38, 0.74, 0.99, 0.65, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.20, 0.93, 0.99, 0.99, 0.75, 0.45, 0.99, 0.89, 0.18, 0.31, 1.00, 0.66, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.93, 0.99, 0.99, 0.70, 0.05, 0.29, 0.47, 0.08, 0.00, 0.00, 0.99, 0.95, 0.20, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.15, 0.65, 0.99, 0.91, 0.82, 0.33, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.65, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.03, 0.70, 0.99, 0.94, 0.28, 0.07, 0.11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.76, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.22, 0.99, 0.99, 0.25, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.76, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.78, 0.99, 0.75, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.99, 0.77, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.30, 0.96, 0.99, 0.44, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.58, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.90, 0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.03, 0.53, 0.99, 0.73, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.87, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.03, 0.51, 0.99, 0.88, 0.28, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.57, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.65, 0.99, 0.68, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.34, 0.99, 0.88, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.45, 0.93, 0.99, 0.64, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.98, 0.57, 0.19, 0.11, 0.33, 0.70, 0.88, 0.99, 0.87, 0.65, 0.22, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.99, 0.99, 0.90, 0.84, 0.99, 0.99, 0.99, 0.77, 0.51, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.11, 0.78, 0.99, 0.99, 0.99, 0.99, 0.99, 0.91, 0.57, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.10, 0.50, 0.99, 0.99, 0.99, 0.55, 0.15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+          [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each image is currently stored as a 3D tensor of shape [1, 28, 28]. In order to process these images using a MLP, we need to flatten each one into a vector of shape [784].</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Help</p>
+<p><code class="docutils literal notranslate"><span class="pre">tensor.view()</span></code> efficiently reshapes the shape of a PyTorch tensor.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flatten images</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span> <span class="c1"># 784 = 1 x 28 x 28</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: [60000, 784]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print first 2 images</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.01, 0.07, 0.07, 0.07, 0.49, 0.53, 0.69, 0.10, 0.65, 1.00, 0.97, 0.50, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.12, 0.14, 0.37, 0.60, 0.67, 0.99, 0.99, 0.99, 0.99, 0.99, 0.88, 0.67, 0.99, 0.95, 0.76, 0.25, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.93, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.98, 0.36, 0.32, 0.32, 0.22, 0.15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.07, 0.86, 0.99, 0.99, 0.99, 0.99, 0.99, 0.78, 0.71, 0.97, 0.95, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.31, 0.61, 0.42, 0.99, 0.99, 0.80, 0.04, 0.00, 0.17, 0.60, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.05, 0.00, 0.60, 0.99, 0.35, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.55, 0.99, 0.75, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.04, 0.75, 0.99, 0.27, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.14, 0.95, 0.88, 0.63, 0.42, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.32, 0.94, 0.99, 0.99, 0.47, 0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.18, 0.73, 0.99, 0.99, 0.59, 0.11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.06, 0.36, 0.99, 0.99, 0.73, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.98, 0.99, 0.98, 0.25, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.18, 0.51, 0.72, 0.99, 0.99, 0.81, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.15, 0.58, 0.90, 0.99, 0.99, 0.99, 0.98, 0.71, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.09, 0.45, 0.87, 0.99, 0.99, 0.99, 0.99, 0.79, 0.31, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.09, 0.26, 0.84, 0.99, 0.99, 0.99, 0.99, 0.78, 0.32, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.07, 0.67, 0.86, 0.99, 0.99, 0.99, 0.99, 0.76, 0.31, 0.04, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.22, 0.67, 0.89, 0.99, 0.99, 0.99, 0.99, 0.96, 0.52, 0.04, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.53, 0.99, 0.99, 0.99, 0.83, 0.53, 0.52, 0.06, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+        [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.20, 0.62, 0.99, 0.62, 0.20, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.93, 0.99, 0.99, 0.99, 0.93, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.21, 0.89, 0.99, 0.99, 0.94, 0.91, 0.99, 0.22, 0.02, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.04, 0.24, 0.88, 0.99, 0.99, 0.99, 0.79, 0.33, 0.99, 0.99, 0.48, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.64, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.38, 0.74, 0.99, 0.65, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.20, 0.93, 0.99, 0.99, 0.75, 0.45, 0.99, 0.89, 0.18, 0.31, 1.00, 0.66, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.93, 0.99, 0.99, 0.70, 0.05, 0.29, 0.47, 0.08, 0.00, 0.00, 0.99, 0.95, 0.20, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.15, 0.65, 0.99, 0.91, 0.82, 0.33, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.65, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.03, 0.70, 0.99, 0.94, 0.28, 0.07, 0.11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.76, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.22, 0.99, 0.99, 0.25, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.76, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.78, 0.99, 0.75, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.99, 0.77, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.30, 0.96, 0.99, 0.44, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.99, 0.99, 0.58, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.90, 0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.03, 0.53, 0.99, 0.73, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.87, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.03, 0.51, 0.99, 0.88, 0.28, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.57, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.19, 0.65, 0.99, 0.68, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.34, 0.99, 0.88, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.45, 0.93, 0.99, 0.64, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.98, 0.57, 0.19, 0.11, 0.33, 0.70, 0.88, 0.99, 0.87, 0.65, 0.22, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.33, 0.99, 0.99, 0.99, 0.90, 0.84, 0.99, 0.99, 0.99, 0.77, 0.51, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.11, 0.78, 0.99, 0.99, 0.99, 0.99, 0.99, 0.91, 0.57, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.10, 0.50, 0.99, 0.99, 0.99, 0.55, 0.15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]])
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="mlp">
-<h2><span class="section-number">2.5. </span>MLP<a class="headerlink" href="#mlp" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>MLP<a class="headerlink" href="#mlp" title="Link to this heading">#</a></h2>
 <p>        A <strong>multilayer perceptron (MLP)</strong> is a type of neural network composed of multiple layers of fully connected neurons with nonlinear activation functions. Our MLP will have 784 input neurons (one for each pixel in the image) and 10 output neurons (one for each possible class: 0 to 9).</p>
 <figure class="align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/MLP.png"><img alt="../_images/MLP.png" src="../_images/MLP.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">MLP</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">MLP</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="random-initialization">
+<h2><span class="section-number">2.7. </span>Random Initialization<a class="headerlink" href="#random-initialization" title="Link to this heading">#</a></h2>
+<p>To keep things simple for now, we will just initialize the weights and biases of our neural network randomly.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Help</p>
 <p><code class="docutils literal notranslate"><span class="pre">torch.randn()</span></code> generates a tensor filled with random numbers drawn from a normal distribution (mean = 0, standard deviation = 1).</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize_nn</span><span class="p">(</span><span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">initialize_nn</span><span class="p">(</span><span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
 
-    <span class="c1"># seed for reproducibility</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    
+    <span class="c1"># Seed for reproducibility</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+     
+    <span class="c1"># Initialize parameters randomly</span>
     <span class="n">W1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">784</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">),</span>      <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
     <span class="n">b1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">)</span>
     <span class="n">W2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
@@ -507,13 +705,64 @@ Labels: torch.Size([60000])
 </div>
 </div>
 </div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W1    [784, 8]    I just printed the first 15 rows, there would be 784!
+tensor([[-1.04,  0.92, -1.30, -1.11, -1.22,  1.17, -1.06, -0.12],
+        [-0.91,  0.35, -0.57, -0.24,  1.01, -0.75, -0.22, -0.43],
+        [-1.51, -0.46, -0.85,  0.53,  0.03, -0.05,  1.07,  0.89],
+        [ 0.46, -0.50,  0.13,  2.76,  0.14,  1.12,  0.32,  1.75],
+        [-0.76,  1.83, -0.28, -0.27, -1.29, -0.02, -0.24, -0.71],
+        [ 1.16,  0.43, -1.19, -0.75, -0.93, -0.86, -0.96, -0.10],
+        [-1.02,  0.32, -1.60,  1.85,  0.04,  1.59, -0.59,  1.13],
+        [ 0.76, -1.20, -0.58, -0.44, -1.98,  0.78, -0.77, -0.14],
+        [ 1.14, -0.64, -1.47, -0.21, -0.87,  1.62, -0.24,  0.94],
+        [ 2.11, -0.98,  0.18, -0.13, -0.27,  0.34,  0.19,  2.14],
+        [ 0.85,  0.10, -0.06,  0.83,  0.56, -0.78,  0.33,  0.18],
+        [ 2.11,  1.07,  0.02,  1.12, -1.49, -0.20, -1.05, -1.58],
+        [ 0.10, -0.35,  0.24,  0.65,  0.87, -0.93,  0.18,  1.02],
+        [-0.48, -0.54, -0.53, -0.64,  0.04, -0.48, -0.04,  1.20],
+        [ 0.54, -0.19,  0.59,  0.72,  0.51,  1.52, -0.49,  0.92]])
+
+b1    [8]
+tensor([0., 0., 0., 0., 0., 0., 0., 0.])
+
+W2    [8, 8]
+tensor([[ 0.60,  1.00, -1.36, -0.05,  1.55,  0.28, -0.41,  1.18],
+        [ 1.31,  0.49, -1.58, -0.16,  2.38, -0.62,  2.97, -0.91],
+        [ 1.12,  0.38,  0.85,  0.53, -1.18, -0.60,  2.36,  0.54],
+        [-0.70,  0.01, -1.00,  0.79, -0.78,  0.62,  0.03, -0.43],
+        [-1.29,  0.79, -0.72, -0.20, -0.76,  0.28, -0.04,  0.99],
+        [ 0.52,  1.54, -0.29, -0.90, -0.23,  0.01, -1.37, -1.14],
+        [ 0.28, -0.04,  1.17, -0.47, -1.07,  0.95, -0.16, -0.58],
+        [-0.86, -1.00, -0.24,  1.27, -2.15, -1.73, -1.59,  0.19]])
+
+b2    [8]
+tensor([0., 0., 0., 0., 0., 0., 0., 0.])
+
+W3    [8, 10]
+tensor([[ 0.85,  0.41,  0.43,  0.29,  0.08, -1.04,  0.01, -0.47, -0.39,  0.94],
+        [-1.68,  0.87,  0.00, -0.07, -0.29, -0.07, -1.39, -1.13, -0.39, -0.97],
+        [ 0.31, -0.50, -0.65, -1.11,  1.08,  0.16, -0.40, -1.53, -1.29,  0.51],
+        [-0.88, -1.01, -0.69,  0.27, -1.10, -0.42, -0.13,  2.31, -0.80,  1.76],
+        [-0.51, -1.28,  0.50,  0.33,  0.30,  0.37,  0.01, -0.95, -1.21, -0.89],
+        [ 0.05, -0.91,  0.35, -1.67, -0.75, -1.28, -0.60, -0.10,  0.63,  0.37],
+        [-0.75,  0.71, -1.42,  0.60, -0.60, -0.14,  1.02,  1.19, -0.32, -1.31],
+        [-1.08, -0.90, -1.47,  0.40,  1.35, -0.63, -1.61, -1.72, -0.40,  1.70]])
+
+b3    [10]
+tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="forward-pass">
-<h2><span class="section-number">2.6. </span>Forward Pass<a class="headerlink" href="#forward-pass" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.8. </span>Forward Pass<a class="headerlink" href="#forward-pass" title="Link to this heading">#</a></h2>
 <p>In the <strong>forward pass</strong>, the input data flows through the neural network, layer by layer, to produce the network’s output.</p>
 <div class="admonition-neuron-s-output admonition">
 <p class="admonition-title">Neuron’s output</p>
-<p>In section <a class="reference internal" href="ch8.html#id2"><span class="std std-ref">2.2</span></a>, we saw that the output of a neuron is given by the formula:</p>
+<p>In section <a class="reference internal" href="#id2"><span class="std std-ref">2.2 Neurons</span></a>, we saw that the output of a neuron is given by the formula:</p>
 <br>
 <div class="math notranslate nohighlight">
 \[
@@ -522,7 +771,7 @@ h = \sigma\left(x_1w_1 + x_2w_2 + \dots + x_dw_d + b\right)
 \]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(d\)</span> is the dimensionality of the input vector.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span> is the number of inputs to the neuron.</p></li>
 </ul>
 </div>
 <div class="admonition-neuron-s-output-dot-product admonition">
@@ -585,7 +834,7 @@ b_1 &amp; b_2 &amp; \dots &amp; b_m
 </div>
 <div class="admonition-layer-s-output-multiple-examples admonition">
 <p class="admonition-title">Layer’s output (multiple examples)</p>
-<p>Uisng matrix multiplication we can efficiently calculate in parallel the output of a layer for several input examples:</p>
+<p>Using matrix multiplication we can efficiently calculate in parallel the output of a layer for several input examples:</p>
 <br>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -626,47 +875,117 @@ b_{1} &amp; b_{2} &amp; \dots &amp; b_{m}
 <p>Each row of the output matrix contains the activation values of all the neurons in the layer for a single input example.</p>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># forward pass</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>   <span class="c1"># (60000,  8) = (60000, 784) x (784, 8) + (8)</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>  <span class="c1"># (60000,  8) = (60000,   8) x (8,   8) + (8)</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>          <span class="c1"># (60000, 10) = (60000,   8) x (8, 10)  + (10)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h1    [60000, 8]    I just printed the first 15 rows, there would be 60000!
+tensor([[ 1.00,  1.00, -1.00, -1.00,  1.00,  1.00,  1.00, -1.00],
+        [-1.00, -0.98, -1.00, -1.00,  1.00,  1.00, -1.00, -1.00],
+        [ 0.99, -1.00,  1.00, -1.00,  1.00,  1.00,  1.00, -0.10],
+        [ 1.00,  0.95, -0.87, -1.00,  0.98, -1.00,  1.00, -1.00],
+        [ 0.89,  0.07, -1.00, -1.00,  1.00,  1.00, -1.00, -0.22],
+        [ 1.00, -1.00, -1.00, -1.00,  0.68,  1.00, -1.00,  1.00],
+        [ 1.00,  1.00, -1.00, -1.00,  0.10,  0.60,  1.00, -1.00],
+        [ 1.00,  1.00, -1.00, -1.00,  1.00,  0.95, -0.30, -1.00],
+        [ 0.82,  0.98, -1.00, -1.00,  0.99, -0.19,  0.99,  0.91],
+        [-0.91,  1.00, -0.98, -1.00,  1.00,  1.00,  0.97,  0.97],
+        [ 1.00,  1.00, -1.00, -1.00, -1.00, -1.00,  1.00, -1.00],
+        [ 0.64,  1.00,  1.00, -1.00,  1.00,  1.00, -1.00, -0.82],
+        [ 1.00,  1.00, -1.00, -1.00,  1.00, -0.01,  1.00, -1.00],
+        [ 1.00,  1.00, -1.00, -1.00, -0.86,  1.00,  1.00, -1.00],
+        [ 1.00,  1.00, -1.00, -1.00,  1.00, -1.00,  1.00, -0.50]])
+
+h2    [60000, 8]    I just printed the first 15 rows, there would be 60000!
+tensor([[-1.04,  0.92, -1.30, -1.11, -1.22,  1.17, -1.06, -0.12],
+        [-0.91,  0.35, -0.57, -0.24,  1.01, -0.75, -0.22, -0.43],
+        [-1.51, -0.46, -0.85,  0.53,  0.03, -0.05,  1.07,  0.89],
+        [ 0.46, -0.50,  0.13,  2.76,  0.14,  1.12,  0.32,  1.75],
+        [-0.76,  1.83, -0.28, -0.27, -1.29, -0.02, -0.24, -0.71],
+        [ 1.16,  0.43, -1.19, -0.75, -0.93, -0.86, -0.96, -0.10],
+        [-1.02,  0.32, -1.60,  1.85,  0.04,  1.59, -0.59,  1.13],
+        [ 0.76, -1.20, -0.58, -0.44, -1.98,  0.78, -0.77, -0.14],
+        [ 1.14, -0.64, -1.47, -0.21, -0.87,  1.62, -0.24,  0.94],
+        [ 2.11, -0.98,  0.18, -0.13, -0.27,  0.34,  0.19,  2.14],
+        [ 0.85,  0.10, -0.06,  0.83,  0.56, -0.78,  0.33,  0.18],
+        [ 2.11,  1.07,  0.02,  1.12, -1.49, -0.20, -1.05, -1.58],
+        [ 0.10, -0.35,  0.24,  0.65,  0.87, -0.93,  0.18,  1.02],
+        [-0.48, -0.54, -0.53, -0.64,  0.04, -0.48, -0.04,  1.20],
+        [ 0.54, -0.19,  0.59,  0.72,  0.51,  1.52, -0.49,  0.92]])
+
+logits    [60000, 10]    I just printed the first 15 rows, there would be 60000!
+tensor([[-0.19,  1.28,  3.28, -0.45, -1.61, -1.31, -0.22, -2.12,  0.91, -4.21],
+        [-0.42, -0.76,  1.84, -3.54,  1.45,  0.73, -2.76, -5.39,  0.36, -2.04],
+        [ 0.21,  0.56,  0.03, -3.09,  2.88, -2.01, -4.71, -7.10,  0.51,  2.56],
+        [-2.46,  0.19, -0.33,  0.54,  0.10, -2.17, -1.76, -3.66,  0.08, -2.63],
+        [-2.30, -0.55,  1.71,  0.83,  1.78,  0.86, -3.19, -5.19,  0.62, -1.91],
+        [-2.20,  1.30, -0.13,  1.71,  1.61,  1.49, -2.80, -2.35,  1.73,  0.11],
+        [-0.28,  1.77,  2.87, -0.29, -2.07, -1.28,  0.55, -1.34,  0.74, -5.07],
+        [-1.19,  0.92,  1.85,  0.16, -0.76, -1.60, -1.01, -2.95,  0.53, -3.45],
+        [-1.39, -0.42,  1.43,  1.84,  1.66,  1.46, -1.61, -3.33,  0.30, -1.51],
+        [ 1.47,  3.29,  2.63,  0.02,  0.20,  2.67,  0.68, -0.52,  2.37, -2.95],
+        [ 1.30,  0.27,  1.40, -0.43, -0.78, -1.40,  1.78, -1.01,  0.20, -3.30],
+        [-2.45,  2.10, -0.60,  3.48,  1.11, -0.22, -0.69, -3.41, -1.04, -3.36],
+        [-1.90,  0.84,  0.70,  0.35, -0.67, -1.97, -1.11, -2.96,  0.29, -3.50],
+        [ 0.24,  1.58,  3.56, -0.72, -1.88, -1.10,  0.35, -1.76,  0.73, -4.74],
+        [-2.45, -0.10, -0.46,  0.57,  0.11, -1.74, -1.48, -3.18,  0.30, -2.73]])
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="tanh">
-<h2><span class="section-number">2.7. </span>Tanh<a class="headerlink" href="#tanh" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.9. </span>Tanh<a class="headerlink" href="#tanh" title="Link to this heading">#</a></h2>
 </section>
 <section id="softmax">
-<h2><span class="section-number">2.8. </span>Softmax<a class="headerlink" href="#softmax" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.10. </span>Softmax<a class="headerlink" href="#softmax" title="Link to this heading">#</a></h2>
 <p>        <strong>Softmax</strong> is an activation function often used in the output layer of neural networks. It transforms raw neural network outputs, known as logits, into probability distributions where each probability represents the model’s confidence that a given example belongs to a specific class.</p>
 <figure class="align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/softmax.png"><img alt="../_images/softmax.png" src="../_images/softmax.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Softmax</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Softmax</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># forward pass</span>
-<span class="n">h1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">W1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>   <span class="c1"># (60000, 100) = (60000, 784) x (784, 100) + (100)</span>
-<span class="n">h2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>  <span class="c1"># (60000, 100) = (60000, 100) x (100, 100) + (100)</span>
-<span class="n">logits</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span>          <span class="c1"># (60000,  10) = (60000, 100) x (100,  10) + (10)</span>
-
-<span class="c1"># softmax</span>
-<span class="n">probs</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span> <span class="o">/</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># (60000,  10)</span>
-
-<span class="c1"># print  first 5 probabilities</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">probs</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probs</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span> <span class="o">/</span> <span class="n">logits</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[    0.6741,     0.3209,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0050,     0.0000,     0.0000],
-        [    0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.8520,     0.0000,     0.1480],
-        [    0.0000,     1.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000,     0.0000],
-        [    0.0000,     0.0000,     0.0005,     0.0000,     0.9965,     0.0000,     0.0000,     0.0001,     0.0028,     0.0000],
-        [    0.9911,     0.0000,     0.0033,     0.0000,     0.0000,     0.0000,     0.0056,     0.0000,     0.0000,     0.0000]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>probs    [60000, 10]    I just printed the first 15 rows, there would be 60000!
+tensor([[    0.02,     0.10,     0.75,     0.02,     0.01,     0.01,     0.02,     0.00,     0.07,     0.00],
+        [    0.04,     0.03,     0.41,     0.00,     0.28,     0.13,     0.00,     0.00,     0.09,     0.01],
+        [    0.03,     0.05,     0.03,     0.00,     0.49,     0.00,     0.00,     0.00,     0.05,     0.35],
+        [    0.01,     0.19,     0.11,     0.27,     0.17,     0.02,     0.03,     0.00,     0.17,     0.01],
+        [    0.01,     0.03,     0.29,     0.12,     0.31,     0.13,     0.00,     0.00,     0.10,     0.01],
+        [    0.00,     0.14,     0.03,     0.21,     0.19,     0.17,     0.00,     0.00,     0.21,     0.04],
+        [    0.03,     0.20,     0.60,     0.03,     0.00,     0.01,     0.06,     0.01,     0.07,     0.00],
+        [    0.02,     0.19,     0.48,     0.09,     0.04,     0.02,     0.03,     0.00,     0.13,     0.00],
+        [    0.01,     0.03,     0.18,     0.28,     0.23,     0.19,     0.01,     0.00,     0.06,     0.01],
+        [    0.06,     0.36,     0.18,     0.01,     0.02,     0.19,     0.03,     0.01,     0.14,     0.00],
+        [    0.20,     0.07,     0.23,     0.04,     0.03,     0.01,     0.33,     0.02,     0.07,     0.00],
+        [    0.00,     0.18,     0.01,     0.70,     0.07,     0.02,     0.01,     0.00,     0.01,     0.00],
+        [    0.02,     0.28,     0.24,     0.17,     0.06,     0.02,     0.04,     0.01,     0.16,     0.00],
+        [    0.03,     0.11,     0.77,     0.01,     0.00,     0.01,     0.03,     0.00,     0.05,     0.00],
+        [    0.01,     0.14,     0.10,     0.28,     0.17,     0.03,     0.04,     0.01,     0.21,     0.01]])
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="calculate-loss">
-<h2><span class="section-number">2.9. </span>Calculate Loss<a class="headerlink" href="#calculate-loss" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.11. </span>Calculate Loss<a class="headerlink" href="#calculate-loss" title="Link to this heading">#</a></h2>
 <p>        The forward pass can also be seen as the step where the model, using its current parameters, generates predictions. The <strong>Cross-Entropy Loss</strong> is a widely used loss function for classification tasks that evaluates how well these predictions align with the labels. It combines Softmax with the average negative log-likelihood.</p>
 <div class="admonition-likelihood admonition">
 <p class="admonition-title">Likelihood</p>
@@ -700,9 +1019,9 @@ b_{1} &amp; b_{2} &amp; \dots &amp; b_{m}
 <li><p>If we pass in a probability of 0, the log probability is <span class="math notranslate nohighlight">\(-\infty\)</span>.</p></li>
 </ul>
 <figure class="align-default" id="log-function">
-<a class="reference internal image-reference" href="../_images/log-function.png"><img alt="../_images/log-function.png" src="../_images/log-function.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../_images/log-function.png"><img alt="../_images/log-function.png" src="../_images/log-function.png" style="width: 250px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Logarithmic Function</span><a class="headerlink" href="#log-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Logarithmic Function</span><a class="headerlink" href="#log-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <br>
@@ -725,7 +1044,7 @@ b_{1} &amp; b_{2} &amp; \dots &amp; b_{m}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of train images </span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">60000</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># average NLL</span>
 <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">probs</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">train_y</span><span class="p">]</span><span class="o">.</span><span class="n">log</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -735,14 +1054,14 @@ b_{1} &amp; b_{2} &amp; \dots &amp; b_{m}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss: 15.9699
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss: 3.6710
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="backward-pass">
-<h2><span class="section-number">2.10. </span>Backward Pass<a class="headerlink" href="#backward-pass" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.12. </span>Backward Pass<a class="headerlink" href="#backward-pass" title="Link to this heading">#</a></h2>
 <p>        A lower loss indicates that the model is making more accurate predictions by assigning higher probabilities to the correct classes. Thus, to improve the model’s performance, we aim to minimize the loss by adjusting its parameters.</p>
 <p>        During the <strong>backward pass</strong>, or backpropagation, we calculate the gradient of the loss function with respect to these parameters. This gradient is determined by computing the derivative of the loss with respect to the model’s parameters using the chain rule. To simplify this process, we will break the forward pass into smaller components, making it easier to differentiate.</p>
 <div class="cell docutils container">
@@ -939,11 +1258,11 @@ db1 = \text{sum of columns of dh1\_pre}
 </div>
 </section>
 <section id="update-parameters">
-<h2><span class="section-number">2.11. </span>Update Parameters<a class="headerlink" href="#update-parameters" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.13. </span>Update Parameters<a class="headerlink" href="#update-parameters" title="Link to this heading">#</a></h2>
 <p>        A gradient is a vector that indicates the direction and rate of the steepest increase in a function’s value. To minimize the loss function, we use <strong>gradient descent</strong>, an optimization algorithm that updates the model’s parameters by moving in the opposite direction of the gradient.</p>
 <div class="admonition-gradient-descent admonition">
 <p class="admonition-title">Gradient descent</p>
-<p>Gradient descent updates each parameter by subtracting a fraction of the gradient from its current value, scaled by a factor known as the learning rate.</p>
+<p>Gradient descent updates each parameter by subtracting the gradient scaled by a factor (known as the learning rate) from its current value.</p>
 <br>
 <div class="math notranslate nohighlight">
 \[
@@ -958,7 +1277,7 @@ db1 = \text{sum of columns of dh1\_pre}
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The learning rate determines the size of the steps we take towards the minimum. A smaller learning rate results in more precise but slower convergence, while a larger learning rate can speed up convergence but may risk overshooting the minimum.</p>
+<p>The learning rate determines the size of the steps we take towards the minimum loss. A smaller learning rate results in more precise but slower convergence, while a larger learning rate can speed up convergence but may risk overshooting the minimum.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -971,7 +1290,7 @@ db1 = \text{sum of columns of dh1\_pre}
 </div>
 </section>
 <section id="training">
-<h2><span class="section-number">2.12. </span>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.14. </span>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
 <p>        During <strong>training</strong>, a neural network iteratively performs a forward pass, calculates the loss, makes a backward pass, and updates its parameters. In this case, since the entire trainig dataset is processed in each training iteration, we can refer to each iteration as an epoch.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -1011,7 +1330,7 @@ db1 = \text{sum of columns of dh1\_pre}
     <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">log_probs</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">train_y</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
     <span class="c1"># print loss every 10 epochs</span>
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="n">epochs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="n">epochs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2">     Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     
 
@@ -1055,37 +1374,22 @@ db1 = \text{sum of columns of dh1\_pre}
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  0/100     Loss: 15.9699
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch:  0/100     Loss: 3.6710
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 10/100     Loss: 10.9262
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 20/100     Loss: 2.8051
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 20/100     Loss: 8.3451
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 40/100     Loss: 2.4914
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 30/100     Loss: 6.7141
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 60/100     Loss: 2.3751
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 40/100     Loss: 5.6266
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 80/100     Loss: 2.3183
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 50/100     Loss: 4.8790
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 60/100     Loss: 4.3457
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 70/100     Loss: 3.9500
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 80/100     Loss: 3.6406
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 90/100     Loss: 3.3900
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 99/100     Loss: 3.2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 99/100     Loss: 2.2843
 </pre></div>
 </div>
 </div>
@@ -1149,8 +1453,7 @@ db1 = \text{sum of columns of dh1\_pre}
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1163,14 +1466,16 @@ db1 = \text{sum of columns of dh1\_pre}
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neurons">2.2. Neurons</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-nns-learn">2.3. How NNs Learn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digits-recognizer">2.4. Digits Recognizer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">2.5. MLP</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">2.6. Forward Pass</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tanh">2.7. Tanh</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">2.8. Softmax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-loss">2.9. Calculate Loss</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-pass">2.10. Backward Pass</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">2.11. Update Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">2.12. Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">2.5. Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">2.6. MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-initialization">2.7. Random Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">2.8. Forward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tanh">2.9. Tanh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">2.10. Softmax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-loss">2.11. Calculate Loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-pass">2.12. Backward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">2.13. Update Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">2.14. Training</a></li>
 </ul>
   </nav></div>
 
@@ -1219,8 +1524,8 @@ By Daniel Simon
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
