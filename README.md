@@ -1,16 +1,11 @@
 # Mastering Deep Learning
 
-**Author:** Daniel Simon
-
-**Title:** Mastering Deep Learning
-
-**Date Published:** 2025-10-06
-
-**Version:** 1.0
-
-**DOI:** https://doi.org/10.5281/zenodo.17275135
-
-**Read online:** [https://mastering-deep-learning.netlify.app](https://mastering-deep-learning.netlify.app)
+- **Author:** Daniel Simon
+- **Title:** Mastering Deep Learning
+- **Date Published:** 2025-10-06
+- **Version:** 1.0
+- **DOI:** https://doi.org/10.5281/zenodo.17275135
+- **Read online:** [https://mastering-deep-learning.netlify.app](https://mastering-deep-learning.netlify.app)
 
 <br>
 
