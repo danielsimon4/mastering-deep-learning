@@ -4,7 +4,7 @@
 - **Title:** Mastering Deep Learning
 - **Date Published:** 2025-10-06
 - **Version:** 1.0
-- **DOI:** https://doi.org/10.5281/zenodo.17275135
+- **DOI (Zenodo):** https://doi.org/10.5281/zenodo.17275135
 - **Read online:** https://mastering-deep-learning.netlify.app
 
 <br>
