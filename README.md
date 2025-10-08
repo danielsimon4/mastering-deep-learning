@@ -12,7 +12,7 @@
 
 ## Overview
 
-*Mastering Deep Learning* offers a practical, code-first approach to understanding and applying modern AI techniques. The book emphasizes clarity, simplicity, and hands-on examples, guiding students, researchers, and practitioners from core concepts to advanced applications.
+*Mastering Deep Learning* offers a practical, code-first approach to understanding and applying modern AI techniques. The book emphasizes clarity, guiding students, researchers, and practitioners from the fundamentals of deep learning to advanced applications in image recognition and text generation.
 
 <br>
 
