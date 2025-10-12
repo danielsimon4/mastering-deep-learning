@@ -9,7 +9,7 @@
 
 <br>
 
-[![Mastering Deep Learning]((https://mastering-deep-learning.netlify.app/_static/logo.png))](https://mastering-deep-learning.netlify.app)
+[![Mastering Deep Learning](https://mastering-deep-learning.netlify.app/_static/logo.png)](https://mastering-deep-learning.netlify.app)
 
 
 ## Overview
