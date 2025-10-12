@@ -1,7 +1,7 @@
 # Mastering Deep Learning: From Tensors to Transformers
 
 - **Author:** Daniel Simon
-- **Title:** Mastering Deep Learning
+- **Title:** Mastering Deep Learning: From Tensors to Transformers
 - **Date Published:** 2025-10-06
 - **Version:** 1.0
 - **DOI (Zenodo):** https://doi.org/10.5281/zenodo.17275135
