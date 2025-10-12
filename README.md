@@ -12,7 +12,7 @@
 
 ## Overview
 
-***Mastering Deep Learning*** offers a fresh perspective on learning AI. Instead of overwhelming you with dense formulas, endless theory, or superficial overviews that skip practical use, this book teaches the fundamentals of deep learning, image recognition, and text generation through an intuitive, hands-on approach.
+***Mastering Deep Learning*** offers a fresh perspective on learning AI. Instead of overwhelming you with dense formulas, endless theory, or superficial overviews that skip practical use, this book teaches the **fundamentals of deep learning**, **image recognition**, and **text generation** through an intuitive, hands-on approach.
 
 It is built around three guiding principles:
 - **Simplicity**: Concepts are explained as clearly and directly as possible, without unnecessary complexity.
