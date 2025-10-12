@@ -1,4 +1,4 @@
-# Mastering Deep Learning
+# Mastering Deep Learning: From Tensors to Transformers
 
 - **Author:** Daniel Simon
 - **Title:** Mastering Deep Learning
@@ -12,46 +12,11 @@
 
 ## Overview
 
-*Mastering Deep Learning* offers a practical, code-first approach to understanding and applying modern AI techniques. The book emphasizes clarity, guiding students, researchers, and practitioners from the fundamentals of deep learning to advanced models for image recognition and text generation.
+***Mastering Deep Learning*** offers a fresh perspective on learning AI. Instead of overwhelming you with dense formulas, endless theory, or superficial overviews that skip practical use, this book teaches the fundamentals of deep learning, image recognition, and text generation through an intuitive, hands-on approach.
 
-<br>
+It is built around three guiding principles:
+- **Simplicity**: Concepts are explained as clearly and directly as possible, without unnecessary complexity.
+- **Code-first learning**: Every idea comes with ready-to-run examples, so you build understanding by working through the code.
+- **Expanding scope**: Starting with tensors and core fundamentals, the book gradually progresses to advanced models like WRNs and GPTs with millions of parameters.
 
-## Copyright
-
-**Copyright © 2025 by Daniel Simon. All Rights Reserved.**
-
-*No part of this book may be reproduced, stored in a retrieval system, or transmitted in any form or by any means — electronic, mechanical, photocopying, recording, or otherwise — without the prior written permission of the author, except in the case of brief quotations used in reviews or scholarly works.*
-
-<br>
-
-## How to Cite This Book  
-
-If you use or reference this book, please cite it as follows:
-
-<br>
-
-**APA (7th edition):** 
-
-Simon, D. (2025). Mastering Deep Learning (1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.17275135 
-
-<br>
-
-**MLA (9th edition):**
-
-Simon, D. Mastering Deep Learning. 1.0, Zenodo, 2025, https://doi.org/10.5281/zenodo.17275135
-
-<br>
-
-**BibTeX:**  
-```bibtex
-@book{simon2025mastering,
-  author    = {Simon, Daniel},
-  title     = {Mastering Deep Learning},
-  year      = {2025},
-  publisher = {Zenodo},
-  version   = {1.0},
-  doi       = {10.5281/zenodo.17275135},
-  url       = {https://doi.org/10.5281/zenodo.17275135}
-}
-```
-
+Whether you’re a student, researcher, or industry professional, this book provides the tools, examples, and explanations to help you confidently understand and apply deep learning to real-world projects. All you need is a basic foundation in math and Python to get started!
