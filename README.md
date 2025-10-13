@@ -5,12 +5,13 @@
 - **Date Published:** 2025-10-06
 - **Version:** 1.0
 - **DOI (Zenodo):** https://doi.org/10.5281/zenodo.17275135
-- **Read online:** https://mastering-deep-learning.netlify.app
 
 <br>
 
 ## Read the Book Online
-🔗 [https://mastering-deep-learning.netlify.app](https://mastering-deep-learning.netlify.app)
+🔗 https://mastering-deep-learning.netlify.app
+
+<br>
 
 ## Overview
 
