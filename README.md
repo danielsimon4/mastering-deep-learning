@@ -2,14 +2,14 @@
 
 - **Author:** Daniel Simon
 - **Title:** Mastering Deep Learning: From Tensors to Transformers
-- **Date Published:** 2025-10-06
-- **Version:** 1.0
-- **DOI (Zenodo):** https://doi.org/10.5281/zenodo.17275135
+- **Date Published:** 2025-10-12
+- **Version:** 2.0
+- **DOI (Zenodo):** [https://doi.org/10.5281/zenodo.17275135](https://doi.org/10.5281/zenodo.17336329.)
 
 <br>
 
 ## Read the Book Online
-🔗 https://mastering-deep-learning.netlify.app
+🔗 [https://mastering-deep-learning.netlify.app](https://mastering-deep-learning.netlify.app)
 
 <br>
 
