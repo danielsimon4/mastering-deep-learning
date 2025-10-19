@@ -3,7 +3,7 @@
 - **Author:** Daniel Simon
 - **Date Published:** 2025-10-12
 - **Version:** 2.0
-- **DOI (Zenodo):** [https://doi.org/10.5281/zenodo.17275135](https://doi.org/10.5281/zenodo.17336329.)
+- **DOI (Zenodo):** [https://doi.org/10.5281/zenodo.17336329](https://doi.org/10.5281/zenodo.17336329)
 
 <br>
 
