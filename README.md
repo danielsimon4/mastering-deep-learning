@@ -5,12 +5,11 @@
 - **Version:** 2.0
 - **DOI (Zenodo):** [https://doi.org/10.5281/zenodo.17336329](https://doi.org/10.5281/zenodo.17336329)
 
+
 <br>
 
 ## Read the Book Online
 🔗 [https://mastering-deep-learning.netlify.app](https://mastering-deep-learning.netlify.app)
-
-<img width="1200" height="627" alt="image" src="https://github.com/user-attachments/assets/f2c76bd7-4d0b-40d3-857b-67c47d9d3ef9" />
 
 
 <br>
@@ -25,3 +24,6 @@ It is built around three guiding principles:
 - **Expanding scope**: Starting with tensors and core fundamentals, the book gradually progresses to advanced models like WRNs and GPTs with millions of parameters.
 
 Whether you are a student, researcher, or industry professional, this book provides the tools, examples, and explanations to help you confidently understand and apply deep learning to real-world projects. All you need is a basic foundation in math and Python to get started!
+
+
+<img width="1200" height="627" alt="image" src="https://github.com/user-attachments/assets/f2c76bd7-4d0b-40d3-857b-67c47d9d3ef9" />
