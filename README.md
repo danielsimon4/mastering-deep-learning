@@ -10,6 +10,9 @@
 ## Read the Book Online
 🔗 [https://mastering-deep-learning.netlify.app](https://mastering-deep-learning.netlify.app)
 
+<img width="1200" height="627" alt="image" src="https://github.com/user-attachments/assets/f2c76bd7-4d0b-40d3-857b-67c47d9d3ef9" />
+
+
 <br>
 
 ## Overview
