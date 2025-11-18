@@ -26,4 +26,6 @@ It is built around three guiding principles:
 Whether you are a student, researcher, or industry professional, this book provides the tools, examples, and explanations to help you confidently understand and apply deep learning to real-world projects. All you need is a basic foundation in math and Python to get started!
 
 
+<br>
+
 <img width="1200" height="627" alt="image" src="https://github.com/user-attachments/assets/f2c76bd7-4d0b-40d3-857b-67c47d9d3ef9" />
